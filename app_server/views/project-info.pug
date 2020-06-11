@@ -3,7 +3,7 @@ extends layout
 block content
   .row.banner
     .col-12
-      h1 Copper Landing
+      h1=pageHeader.title
   .row
     .col-12.col-lg-9
       .row
@@ -15,13 +15,9 @@ block content
             .card-block
               a.btn.btn-primary.float-right(href='/project/site/new') Add site
               h2.card-title Sites
-              .row.site
-                .col-12.no-gutters.site-header
-                  span.site Copper
-                .col-12
-                  p 208 15th Ave, Seattle WA
-              .row.site
-                .col-12.no-gutters.site-header
-                  span.site Landing
-                .col-12
-                  p 1093 23rd Ave, Seattle WA
+              each site in project.sites
+                .row.site
+                  .col-12.no-gutters.site-header
+                    span.site=site.siteName
+                  .col-12
+                    p=site.siteAddress

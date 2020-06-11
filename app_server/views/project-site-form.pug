@@ -3,7 +3,7 @@ extends layout
 block content
   .row.banner
     .col-12
-      h1 New Site
+      h1=pageHeader.title
   .row
     .col-12.col-md-8
       form(action='/project', method='get',role='form')

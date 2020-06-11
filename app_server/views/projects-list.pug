@@ -9,11 +9,12 @@ block content
     .col-12.col-md-8
       .error= message
 
-      each project in projects
-        .card
-          .card-block
-            h4
-              a(href=`/project/${project._id}`)= project.name
-            p.address= project.address
+      app-project-list
+      
     .col-12.col-md-4
       p.lead= sidebar
+      
+block scripts
+  script(src='/build/runtime-es5.0811dcefd377500b5b1a.js')
+  script(src='/build/polyfills-es5.f1044614286c4864d80f.js')
+  script(src='/build/main-es5.f99c5b2ad5d94f3303b2.js')

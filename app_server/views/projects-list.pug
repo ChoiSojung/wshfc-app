@@ -1,18 +1,19 @@
 extends layout
 
-
 block content
   .row.banner
     .col-12
-      h1 pageHeader.title
-        small &nbsp;#{pageHeader.strapline}
+      h1= pageHeader.title
+        small &nbsp;#{pageHeader.strapLine}
   .row
     .col-12.col-md-8
+      .error= message
+
       each project in projects
         .card
           .card-block
-            h5
-              a(href='/project')= project.name
-              p.address=project.address
+            h4
+              a(href=`/project/${project._id}`)= project.name
+            p.address= project.address
     .col-12.col-md-4
-      p.lead= sidebar  
+      p.lead= sidebar

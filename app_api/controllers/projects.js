@@ -1,6 +1,32 @@
 const mongoose = require('mongoose');
 const Project = mongoose.model('Project');
 
+
+// List Projects
+const projectsList = (req, res)=>{
+    let projects = [];
+        Project
+            .find()
+            .exec((err, theseprojects)=>{
+                if(!theseprojects){
+                    console.log('Projects not found');
+                    return res
+                        .status(404)
+                        .json({"message": "Projects not found"});
+                } else if(err){
+                    console.log('Projects list error: ' + err);
+                    return res
+                        .status(404)
+                        .json(err);
+                } else {
+                    projects = theseprojects
+                    return res
+                        .status(200)
+                        .json(projects);
+                }
+            });
+};
+
 // Create site
 const projectsCreate = (req, res)=>{
     Project.create({
@@ -107,6 +133,7 @@ const projectsDeleteOne = (req, res)=>{
 };
 
 module.exports = {
+    projectsList,
     projectsCreate,
     projectsReadOne,
     projectsUpdateOne,

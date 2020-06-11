@@ -13,7 +13,7 @@ block content
         .col-12
           .card.card-primary.site-card
             .card-block
-              a.btn.btn-primary.float-right(href='/project/site/new') Add site
+              a.btn.btn-primary.float-right(href=`/project/${project._id}/site/new`) Add site
               h2.card-title Sites
               each site in project.sites
                 .row.site

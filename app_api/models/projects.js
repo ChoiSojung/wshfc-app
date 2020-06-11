@@ -18,6 +18,11 @@ const ProjectSchema = new mongoose.Schema({
     address: {
         type: String
     },
+    status: {
+        type: String,
+        enum:['Draft', 'Submitted', null],
+        default: 'Draft'
+    },
     sites:[SiteSchema] 
 });
 

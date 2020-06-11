@@ -1,4 +1,4 @@
-$('#addReview').submit(function (e) {
+$('#addSite').submit(function (e) {
   $('.alert.alert-danger').hide();
   if (!$('input#name').val() || !$('select#rating').val() || !$('textarea#review').val()) {
     if ($('.alert.alert-danger').length) {

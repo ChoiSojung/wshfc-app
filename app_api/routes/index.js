@@ -6,6 +6,7 @@ const ctrlSites = require('../controllers/sites');
 // projects
 router
     .route('/projects')
+    .get(ctrlProjects.projectsList)
     .post(ctrlProjects.projectsCreate);
 
 router

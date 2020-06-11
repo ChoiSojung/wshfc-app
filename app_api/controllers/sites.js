@@ -157,7 +157,7 @@ const sitesDeleteOne = (req, res)=>{
             if(!project){
                 return res
                     .status(404)
-                    .json({"message":"Project not found"})''
+                    .json({"message":"Project not found"});
             } else if(err){
                 return res
                     .status(400)

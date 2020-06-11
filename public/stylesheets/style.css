@@ -9,7 +9,7 @@ legend {
 }
 
 .navbar {
-  background-color: #ad1d28;
+  background-color: #ffffff;
   border-color: #911821;
 }
 
@@ -53,14 +53,14 @@ legend {
   padding-bottom: 0.5em;
 }
 
-.review-header {
+.site-header {
   background-color: #31727a;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   margin-bottom: 0.5em;
 }
 
-.review {
+.site {
   margin-right: -16px;
   margin-left: -16px;
   margin-bottom: 0.5em;

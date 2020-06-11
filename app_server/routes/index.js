@@ -1,8 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var ctrlMain = require('../controllers/main');
+var ctrlProjects = require('../controllers/projects');
+var ctrlOthers = require('../controllers/others');
 
-/* GET home page. */
-router.get('/', ctrlMain.index);
+router.get('/', ctrlProjects.projectlist);
+router.get('/project', ctrlProjects.projectInfo);
+router.get('/project/site/new', ctrlProjects.addSite);
+
+router.get('/about', ctrlOthers.about);
 
 module.exports = router;

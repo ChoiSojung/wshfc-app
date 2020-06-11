@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const SiteSchema = new mongoose.Schema({
     siteName: {
-        type: String
+        type: String,
+        required: true
     },
     siteAddress: {
         type: String
@@ -11,7 +12,8 @@ const SiteSchema = new mongoose.Schema({
 
 const ProjectSchema = new mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        required: true
     },
     address: {
         type: String

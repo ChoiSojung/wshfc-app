@@ -12,18 +12,9 @@ const connect = () => {
   setTimeout(() => mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}), 1000);
 }
 
-if(process.platform ==='win32'){
-    const rl = readLine.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-    rl.on('SIGINT', ()=>{
-        process.emit("SIGINT");
-    });
-}
-
 mongoose.connection.on('connected', () => {
   console.log(`connected to ${dbURI}`);
+  console.log(process.env.MONGODB_URI);
   console.log(process.env.NODE_ENV);
 });
 
@@ -36,6 +27,15 @@ mongoose.connection.on('disconnected', () => {
   console.log(`disconnected from ${dbURI}`);
 });
 
+if(process.platform ==='win32'){
+    const rl = readLine.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+    rl.on('SIGINT', ()=>{
+        process.emit("SIGINT");
+    });
+}
 
 const gracefulShutdown = (msg, callback) => {
   mongoose.connection.close( () => {

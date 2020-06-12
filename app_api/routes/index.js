@@ -4,7 +4,7 @@ const jwt = require('express-jwt');
 const auth = jwt({
     secret: process.env.JWT_SECRET,
     userProperty: 'payload'
-})
+});
 const ctrlProjects = require('../controllers/projects');
 const ctrlSites = require('../controllers/sites');
 const ctrlAuth = require('../controllers/authentication');
@@ -13,13 +13,13 @@ const ctrlAuth = require('../controllers/authentication');
 router
     .route('/projects')
     .get(ctrlProjects.projectsList)
-    .post(auth, ctrlProjects.projectsCreate);
+    .post(ctrlProjects.projectsCreate);
 
 router
     .route('/projects/:projectid')
     .get(ctrlProjects.projectsReadOne)
-    .put(auth, ctrlProjects.projectsUpdateOne)
-    .delete(auth, ctrlProjects.projectsDeleteOne);
+    .put(ctrlProjects.projectsUpdateOne)
+    .delete(ctrlProjects.projectsDeleteOne);
 
 // sites
 router
@@ -28,9 +28,9 @@ router
 
 router
     .route('/projects/:projectid/sites/:siteid')
-    .get(auth, ctrlSites.sitesReadOne)
-    .put(auth, ctrlSites.sitesUpdateOne)
-    .delete(auth, ctrlSites.sitesDeleteOne);
+    .get(ctrlSites.sitesReadOne)
+    .put(ctrlSites.sitesUpdateOne)
+    .delete(ctrlSites.sitesDeleteOne);
 
 
 // authentication

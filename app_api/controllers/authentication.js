@@ -17,7 +17,7 @@ const register = (req, res)=>{
         if(err){
             res
                 .status(404)
-                .json(err);
+                .json({"message": "Error saving user in auth api class: " + err});
         } else {
             const token = user.generateJwt();
             res

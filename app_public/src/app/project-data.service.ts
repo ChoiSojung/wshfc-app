@@ -19,6 +19,7 @@ export class ProjectDataService {
   private apiBaseUrl = environment.apiBaseUrl;
   
   public getProjects(): Promise<Project[]>{
+    console.log(environment.production);
     const url: string=`${this.apiBaseUrl}/projects`;
     return this.http
         .get(url)
@@ -45,6 +46,11 @@ export class ProjectDataService {
       .catch(this.handleError);
   }
   
+  private handleError(error: any): Promise<any>{
+    console.error('Something is wrong', error);
+    return Promise.reject(error.message || error);
+  }
+  
   public login(user: User): Promise<AuthResponse>{
     return this.makeAuthApiCall('login', user);
   }
@@ -62,8 +68,4 @@ export class ProjectDataService {
         .catch(this.handleError);
   }
   
-  private handleError(error: any): Promise<any>{
-    console.error('Something is wrong', error);
-    return Promise.reject(error.message || error);
-  }
 }

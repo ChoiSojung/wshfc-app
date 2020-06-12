@@ -1,21 +1,20 @@
 require('dotenv').config();
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var passport = require('passport');
-var cors = require('cors');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const cors = require('cors');
+const logger = require('morgan');
 require('./app_api/models/db');
 require('./app_api/config/passport');
 
-// import api routes
-//var indexRouter = require('./app_server/routes/index');
-var apiRouter = require('./app_api/routes/index');
+// import api route
+const apiRouter = require('./app_api/routes/index');
 
 // express app
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server','views'));
@@ -44,7 +43,7 @@ app.use('/api', (req, res, next)=>{
 
 // use api routes
 app.use('/api', apiRouter);
-app.get('/(\/about)|(\/project\/[a-z0-9]{24})/', function(req, res, next){
+app.get('/(\/register)|/(\/about)|(\/project\/[a-z0-9]{24})/', function(req, res){
     res.sendFile(path.join(__dirname, 'app_public','build', 'index.html'));
 });
 
@@ -61,6 +60,7 @@ app.use((err, req, res, next)=>{
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

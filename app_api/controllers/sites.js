@@ -1,8 +1,35 @@
 const mongoose = require('mongoose');
 const Project = mongoose.model('Project');
+const User = mongoose.model('User');
+
+// Get username
+const getUser = (req, res, callback)=>{
+    if(req.payload && req.payload.email){
+        User
+            .findOne({email : req.payload.email})
+            .exec((err, user)=>{
+                if(!user){
+                    return res
+                        .status(404)
+                        .json({"message": "User not found"});
+                } else if (err){
+                    console.log(err);
+                    return res
+                        .status(404)
+                        .json(err);
+                }
+                callback(req, res, user.name);
+            });
+    } else {
+        return res
+            .status(404)
+            .json({"message": "User not found"});
+    }
+};
+
 
 // Helper method to add site
-const doAddSite = (req, res, project)=>{
+const doAddSite = (req, res, project, owner)=>{
     if(!project){
         res
             .status(404)
@@ -10,6 +37,7 @@ const doAddSite = (req, res, project)=>{
     } else {
         const {siteName, siteAddress} = req.body;
         project.sites.push({
+            owner,
             siteName,
             siteAddress
         });
@@ -30,26 +58,30 @@ const doAddSite = (req, res, project)=>{
 
 // Exported create site method
 const sitesCreate = (req, res)=>{
-    const projectId = req.params.projectid;
-    if(projectId){
-        Project
-            .findById(projectId)
-            .select('sites')
-            .exec((err, project)=>{
-                if(err){
-                    res
-                        .status(400)
-                        .json(err);
-                } else {
-                    doAddSite(req, res, project);
-                }
-            });
-    } else {
-        res
-            .status(404)
-            .json({"message": "Project not found"});
-    }
+    getUser(req, res,
+        (req, res, userName)=>{
+            const projectId = req.params.projectid;
+            if(projectId){
+                Project
+                    .findById(projectId)
+                    .select('sites')
+                    .exec((err, project)=>{
+                        if(err){
+                            res
+                                .status(400)
+                                .json(err);
+                        } else {
+                            doAddSite(req, res, project, userName);
+                        }
+                    });
+            } else {
+                res
+                    .status(404)
+                    .json({"message": "Project not found"});
+            }
+        });
 };
+  
 
 // Read site
 const sitesReadOne = (req, res)=>{

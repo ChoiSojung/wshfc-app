@@ -7,6 +7,13 @@ const SiteSchema = new mongoose.Schema({
     },
     siteAddress: {
         type: String
+    },
+    owner: {
+        type: String
+    },
+    created:{
+        type: Date,
+        default: Date.now
     }
 });
 
@@ -22,6 +29,13 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         enum:['Draft', 'Submitted', null],
         default: 'Draft'
+    },
+    owner: {
+        type: String
+    },
+    created:{
+        type: Date,
+        default: Date.now
     },
     sites:[SiteSchema] 
 });

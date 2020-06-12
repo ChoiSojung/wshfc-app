@@ -1,8 +1,34 @@
 const mongoose = require('mongoose');
 const Project = mongoose.model('Project');
+const User = mongoose.model('User');
+
+// Get username
+const getUser = (req, res, callback)=>{
+    if(req.payload && req.payload.email){
+        User
+            .findOne({email : req.payload.email})
+            .exec((err, user)=>{
+                if(!user){
+                    return res
+                        .status(404)
+                        .json({"message": "User not found"});
+                } else if (err){
+                    console.log(err);
+                    return res
+                        .status(404)
+                        .json(err);
+                }
+                callback(req, res, user.name);
+            });
+    } else {
+        return res
+            .status(404)
+            .json({"message": "User not found"});
+    }
+};
 
 
-// List Projects
+// List projects
 const projectsList = (req, res)=>{
     let projects = [];
         Project
@@ -27,26 +53,31 @@ const projectsList = (req, res)=>{
             });
 };
 
-// Create site
+// Create project
 const projectsCreate = (req, res)=>{
-    Project.create({
-        name: req.body.name,
-        address: req.body.address
-    },
-    (err, project)=>{
-        if(err){
-            res
-                .status(400)
-                .json(err);
-        } else {
-            res
-                .status(201)
-                .json(project);
-        }
+    getUser(req, res,
+        (req, res, userName)=>{
+            Project.create({
+                owner: userName,
+                name: req.body.name,
+                address: req.body.address
+            },
+            (err, project)=>{
+                if(err){
+                    res
+                        .status(400)
+                        .json(err);
+                } else {
+                    res
+                        .status(201)
+                        .json(project);
+                }
+            });
     });
 };
 
-// Read site
+
+// Read project
 const projectsReadOne = (req, res)=>{
     Project
         .findById(req.params.projectid)
@@ -67,7 +98,7 @@ const projectsReadOne = (req, res)=>{
         });
 };
 
-// Update site
+// Update project
 const projectsUpdateOne = (req, res)=>{
     if(!req.params.projectid){
         return res
@@ -107,7 +138,7 @@ const projectsUpdateOne = (req, res)=>{
         });    
 };
 
-// Delete site
+// Delete project
 const projectsDeleteOne = (req, res)=>{
     const {projectid} = req.params;
     if(projectid){

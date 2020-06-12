@@ -9,7 +9,7 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 const connect = () => {
-  setTimeout(() => mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true }), 1000);
+  setTimeout(() => mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}), 1000);
 }
 
 if(process.platform ==='win32'){

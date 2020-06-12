@@ -18,7 +18,7 @@ export class AuthenticationService {
     return this.storage.getItem('project-token');
   }
   
-  public saveToken(): string{
+  public saveToken(token: string): void {
     this.storage.setItem('project-token', token);
   }
   

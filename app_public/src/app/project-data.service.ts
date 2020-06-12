@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Project, Site } from './project';
 import { User } from './user';
@@ -12,7 +12,9 @@ import { environment } from '../environments/environment';
 })
 export class ProjectDataService {
 
-  constructor(private http: HttpClient, @Inject(BROWSER_STORAGE) private storage: Storage) { }
+  constructor(
+      private http: HttpClient, 
+      @Inject(BROWSER_STORAGE) private storage: Storage) { }
   
   private apiBaseUrl = environment.apiBaseUrl;
   

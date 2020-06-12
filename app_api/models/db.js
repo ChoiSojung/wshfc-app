@@ -24,6 +24,7 @@ if(process.platform ==='win32'){
 
 mongoose.connection.on('connected', () => {
   console.log(`connected to ${dbURI}`);
+  console.log(process.env.NODE_ENV);
 });
 
 mongoose.connection.on('error', err => {

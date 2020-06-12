@@ -1,6 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Project, Site } from './project';
+import { User } from './user';
+import { AuthResponse } from './authresponse';
+import { BROWSER_STORAGE } from './storage';
 import { environment } from '../environments/environment';
 
 
@@ -9,7 +12,7 @@ import { environment } from '../environments/environment';
 })
 export class ProjectDataService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(BROWSER_STORAGE) private storage: Storage) { }
   
   private apiBaseUrl = environment.apiBaseUrl;
   
@@ -38,6 +41,23 @@ export class ProjectDataService {
       .toPromise()
       .then(response => response as Site)
       .catch(this.handleError);
+  }
+  
+  public login(user: User): Promise<AuthResponse>{
+    return this.makeAuthApiCall('login', user);
+  }
+  
+  public register(user: User): Promise<AuthResponse>{
+    return this.makeAuthApiCall('register', user);
+  }
+  
+  private makeAuthApiCall(urlPath: string, user: User): Promise<AuthResponse> {
+    const url: string=`${this.apiBaseUrl}/${urlPath}`;
+    return this.http
+        .post(url, user)
+        .toPromise()
+        .then(response => response as AuthResponse)
+        .catch(this.handleError);
   }
   
   private handleError(error: any): Promise<any>{

@@ -1,7 +1,7 @@
 <div class="card" *ngFor="let project of projects">
   <div class="card-block">
     <h4>
-      <a href="/project/{{project._id}}">{{project.name}}</a>
+      <a routerLink="/project/{{project._id}}">{{project.name}}</a>
     </h4>
     <p class="address">{{project.address}}</p>
       <p class="address">{{project.status}}</p>

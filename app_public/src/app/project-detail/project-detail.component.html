@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-12 col-md-6">
+    <p>{{ project.address }}</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-primary review-card">
+      <div class="card-block">
+        <button (click)="formVisible=true" class="btn btn-primary float-right">Add site</button>
+        <h2 class="card-title">Sites</h2>
+        <div *ngIf="formVisible">
+          <form (ngSubmit)="onSiteSubmit()">
+            <hr>
+            <h4>Add your site</h4>
+            <div *ngIf="formError" class="alert alert-danger" role="alert">
+              {{ formError }}
+            </div>
+            <div class="form-group row">
+              <label for="siteName" class="col-sm-2 col-form-label">Site Name</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="newSite.siteName" id="siteName" name="siteName" required="required" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="siteAddress" class="col-sm-2 col-form-label">Site Address</label>
+              <div class="col-sm-10 col-md-2">
+                <input [(ngModel)]="newSite.siteAddress" id="siteAddress" name="siteAddress" required="required" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary float-right" style="margin-left:15px">Submit</button>
+                    <button (click)="formVisible=false" type="button" class="btn btn-default float-right">Cancel</button>
+                </div>  
+            </div>
+            <hr>
+          </form>
+        </div>
+        <div *ngFor="let site of project.sites" class="row review">
+          <div class="col-12 no-gutters review-header">
+            <span class="siteName">{{ site.siteName }}</span>
+          </div>
+          <div class="col-12">
+            <p [innerHTML]="site.siteAddress"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

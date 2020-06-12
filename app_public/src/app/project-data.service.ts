@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Project } from './project-list/project-list.component';
+import { Project, Site } from './project';
+import { environment } from '../environments/environment';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ export class ProjectDataService {
 
   constructor(private http: HttpClient) { }
   
-  private apiBaseUrl = 'http://localhost:3000/api';
+  private apiBaseUrl = environment.apiBaseUrl;
   
   public getProjects(): Promise<Project[]>{
     const url: string=`${this.apiBaseUrl}/projects`;
@@ -19,6 +20,24 @@ export class ProjectDataService {
         .toPromise()
         .then(response => response as Project[])
         .catch(this.handleError);
+  }
+  
+  public getProjectById(projectId: string): Promise<Project>{
+    const url: string=`${this.apiBaseUrl}/projects/${projectId}`;
+    return this.http
+        .get(url)
+        .toPromise()
+        .then(response => response as Project)
+        .catch(this.handleError);
+  }
+  
+  public addSiteByProjectId(projectId: string, formData: Site): Promise<Site> {
+    const url: string = `${this.apiBaseUrl}/projects/${projectId}/sites`;
+    return this.http
+      .post(url, formData)
+      .toPromise()
+      .then(response => response as Site)
+      .catch(this.handleError);
   }
   
   private handleError(error: any): Promise<any>{

@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectDataService } from '../project-data.service';
+import { Project } from '../project';
 
-export class Project {
-    _id: string;
-    name: string;
-    address: string;
-    status: string;
-}
 
 @Component({
   selector: 'app-project-list',

@@ -4,7 +4,7 @@
     <div class="error"></div>
       <p class="lead" *ngIf="!isLoggedIn()"><a routerLink='/register'><b>Create</b></a> an account to begin your application.
       </p>
-      <p class="lead" *ngIf="isLoggedIn()">Welcome back {{getUsername()}}!</p>
+      <p class="lead" *ngIf="isLoggedIn()">Welcome back <a routerLink='/profile'>{{getUsername()}}</a>!</p>
   </div>    
   <app-sidebar [content]="pageContent.sidebar" class="col-12 col-md-4"></app-sidebar>
 </div>

@@ -1,1 +1,81 @@
-<p>user-profile works!</p>
+<app-header [content]="pageContent.header"></app-header>
+<div class="row">
+    <div class="col-12 col-md-8">
+        <div class="error"></div>
+        <div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-4 pb-5">
+            <!-- Account Sidebar-->
+            <div class="author-card pb-3">
+                <div class="author-card-cover" style="background-image: url(https://demo.createx.studio/createx-html/img/widgets/author/cover.jpg);"></div>
+                <div class="author-card-profile">
+                    <div class="author-card-avatar"><img src="https://www.cariblist.com/admin/assets/avatars/1469270169-avatar-generic.jpg" alt="Profile">
+                    </div>
+                    <div class="author-card-details">
+                        <h5 class="author-card-name text-lg">{{getUsername()}}</h5>
+                    </div>
+                </div>
+            </div> <!--- end author card --->
+            
+            <div class="wizard">
+                <nav class="list-group list-group-flush">
+                    <a class="list-group-item active" href="/settings"><i class="fe-icon-user text-muted"></i>Profile Settings
+                    </a>
+                    <a class="list-group-item" routerLink="/projects">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><i class="fe-icon-heart mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">My Projects</div>
+                            </div><span class="badge badge-secondary">3</span>
+                        </div>
+                    </a>
+                </nav>
+            </div> <!---end wizard--->
+            
+            
+        </div>
+        <!-- Profile Settings-->
+        <div class="col-lg-8 pb-5">
+            <form class="row">
+                <div (submit)="onUpdateUserSubmit()" class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input class="form-control" id="name" name="name" value="{{getUsername()}}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="name" value="{{getUserEmail()}}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-pass">New Password</label>
+                        <input class="form-control" type="password" id="account-pass">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-confirm-pass">Confirm Password</label>
+                        <input class="form-control" type="password" id="account-confirm-pass">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr class="mt-2 mb-3">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                        <div class="custom-control custom-checkbox d-block">
+                            <input class="custom-control-input" type="checkbox" id="subscribe_me" checked="">
+                            <label class="custom-control-label" for="subscribe_me">Subscribe me to Newsletter</label>
+                        </div>
+                        <button class="btn btn-style-1 btn-primary" type="button" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                    </div>
+                </div>
+            </form>
+                
+        </div>
+    </div>
+</div>
+    
+    </div>
+
+</div>

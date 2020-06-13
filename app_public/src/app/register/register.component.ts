@@ -22,7 +22,11 @@ export class RegisterComponent implements OnInit {
         title: 'Create a new account',
         strapline: ''
     },
-    sidebar: ''
+    sidebar: {
+        title:'Contact us',
+        strapline: 'Learn more about our programs and how they help your community at ',
+        url: 'www.wshfc.org'
+    }
   };
 
   constructor(

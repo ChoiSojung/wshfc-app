@@ -15,6 +15,10 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { ProjectDetailPageComponent } from './project-detail-page/project-detail-page.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +31,10 @@ import { LoginComponent } from './login/login.component';
     ProjectDetailComponent,
     ProjectDetailPageComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ContactFormComponent,
+    UserProfileComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,

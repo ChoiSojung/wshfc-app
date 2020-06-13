@@ -1,4 +1,11 @@
 <app-header [content]="pageContent.header"></app-header>
 <div class="row">
-    <div class="col-12 col-lg-8">{{ pageContent.content }}</div>
+    <div class="col-12 col-lg-8">
+        <p class="lead">{{ pageContent.content }}</p>
+    </div>
+    <div class="col-12 col-lg-8">
+        <br>
+        <a class="btn btn-primary" href="http://wshfc.org/mhcf/index.htm" role="button">Learn more»</a>
+    </div>
+    <app-side-nav [content]="pageContent.sidenav" class="col-12 col-md-4"></app-side-nav>
 </div>

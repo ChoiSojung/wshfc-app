@@ -7,6 +7,9 @@ import { HomepageComponent } from '../homepage/homepage.component';
 import { ProjectDetailPageComponent } from '../project-detail-page/project-detail-page.component';
 import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
+import { ProjectListComponent } from '../project-list/project-list.component';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 const routes: Routes =[
     {
@@ -28,6 +31,18 @@ const routes: Routes =[
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'projects',
+        component: ProjectListComponent
+    },
+    {
+        path: 'contact',
+        component: ContactFormComponent
+    },
+    {
+        path: 'profile',
+        component: UserProfileComponent
     }
 ];
 

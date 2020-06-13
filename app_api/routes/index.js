@@ -24,13 +24,13 @@ router
 // sites
 router
     .route('/projects/:projectid/sites')
-    .post(auth, ctrlSites.sitesCreate);
+    .post(ctrlSites.sitesCreate);
 
 router
     .route('/projects/:projectid/sites/:siteid')
     .get(ctrlSites.sitesReadOne)
-    .put(auth, ctrlSites.sitesUpdateOne)
-    .delete(auth, ctrlSites.sitesDeleteOne);
+    .put(ctrlSites.sitesUpdateOne)
+    .delete(ctrlSites.sitesDeleteOne);
 
 
 // authentication

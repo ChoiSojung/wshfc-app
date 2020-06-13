@@ -29,8 +29,8 @@ router
 router
     .route('/projects/:projectid/sites/:siteid')
     .get(ctrlSites.sitesReadOne)
-    .put(ctrlSites.sitesUpdateOne)
-    .delete(ctrlSites.sitesDeleteOne);
+    .put(auth, ctrlSites.sitesUpdateOne)
+    .delete(auth, ctrlSites.sitesDeleteOne);
 
 
 // authentication

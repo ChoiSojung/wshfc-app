@@ -32,7 +32,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(){
   }
   
-  
   public onRegisterSubmit(): void {
     this.formError = '';
     if (
@@ -49,7 +48,9 @@ export class RegisterComponent implements OnInit {
   private doRegister(): void{
     this.authenticationService.register(this.credentials)
         .then(()=> this.router.navigateByUrl('/'))
-        .catch((message)=> this.formError = message);
+        .catch((message)=> {
+            this.formError = message
+        });
   }
 
 }

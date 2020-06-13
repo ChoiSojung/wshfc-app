@@ -3,19 +3,12 @@ const host = process.env.DB_HOST || '127.0.0.1'
 let dbURI = `mongodb://${host}/hb`;
 const readLine = require('readline');
 
-
-if(process.env.NODE_ENV === 'production'){
-    dbURI = process.env.MONGODB_URI;
-}
-
 const connect = () => {
   setTimeout(() => mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}), 1000);
 }
 
 mongoose.connection.on('connected', () => {
-  console.log(`connected to ${dbURI}`);
-  console.log(process.env.MONGODB_URI);
-  console.log(process.env.NODE_ENV);
+  console.log('connected');
 });
 
 mongoose.connection.on('error', err => {
@@ -24,7 +17,7 @@ mongoose.connection.on('error', err => {
 });
 
 mongoose.connection.on('disconnected', () => {
-  console.log(`disconnected from ${dbURI}`);
+  console.log('disconnected');
 });
 
 if(process.platform ==='win32'){

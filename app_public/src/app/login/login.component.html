@@ -1,1 +1,20 @@
-<p>login works!</p>
+<app-header [content]="pageContent.header"></app-header>
+<div class="row">
+    <div class="col-12 col-md-8">
+        <p class="lead">Not registered? Please <a routerLink='/register'>register</a> first
+        </p>
+        <form (ngSubmit)="onLoginSubmit()">
+            <div role="alert" *ngIf="formError" class="alert alert-danger">{{ formError }}</div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholer="Enter email address" [(ngModel)]="credentials.email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholer="e.g 12+ alphanumerics" [(ngModel)]="credentials.password">
+            </div>
+            <button type="submit" role="button" class="btn btn-primary">Sign in</button>
+        </form>
+    </div>
+    <app-sidebar [content]="pageContent.sidebar" class="col-12 col-md-4"></app-sidebar>
+</div>

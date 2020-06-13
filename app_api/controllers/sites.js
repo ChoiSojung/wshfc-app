@@ -29,7 +29,7 @@ const getUser = (req, res, callback)=>{
 
 
 // Helper method to add site
-const doAddSite = (req, res, project, owner)=>{
+const doAddSite = (req, res, project)=>{
     if(!project){
         res
             .status(404)
@@ -37,7 +37,6 @@ const doAddSite = (req, res, project, owner)=>{
     } else {
         const {siteName, siteAddress} = req.body;
         project.sites.push({
-            owner,
             siteName,
             siteAddress
         });
@@ -58,28 +57,25 @@ const doAddSite = (req, res, project, owner)=>{
 
 // Exported create site method
 const sitesCreate = (req, res)=>{
-    getUser(req, res,
-        (req, res, userName)=>{
-            const projectId = req.params.projectid;
-            if(projectId){
-                Project
-                    .findById(projectId)
-                    .select('sites')
-                    .exec((err, project)=>{
-                        if(err){
-                            res
-                                .status(400)
-                                .json(err);
-                        } else {
-                            doAddSite(req, res, project, userName);
-                        }
-                    });
-            } else {
-                res
-                    .status(404)
-                    .json({"message": "Project not found"});
-            }
-        });
+    const projectId = req.params.projectid;
+    if(projectId){
+        Project
+            .findById(projectId)
+            .select('sites')
+            .exec((err, project)=>{
+                if(err){
+                    res
+                        .status(400)
+                        .json(err);
+                } else {
+                    doAddSite(req, res, project);
+                }
+            });
+    } else {
+        res
+            .status(404)
+            .json({"message": "Project not found"});
+    }
 };
 
 // Read site

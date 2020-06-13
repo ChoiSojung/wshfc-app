@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-md navbar-light">
   <div class="container">
-    <a routerLink="" class="navbar-brand">WSHFC Application Portal</a>
+    <a routerLink="" class="navbar-brand">Washington State Housing Finance Commission</a>
     <button type="button" data-toggle="collapse" data-target="#navbarMain" class="navbar-toggler">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,6 +10,9 @@
         <li class="nav-item" routerLinkActive = "active">
           <a routerLink="about" class="nav-link">About</a>
         </li>
+        <li class="nav-item" routerLink = "contact">
+          <a routerLink="about" class="nav-link">Contact us</a>
+        </li>
       </ul>
       <ul class="navbar-nav justify-content-end">
          <li class="nav-item" routerLinkActive = "active">
@@ -18,6 +21,7 @@
          <li class="nav-item dropdown" routerLinkActive="active" *ngIf="isLoggedIn()">
              <a class="nav-link dropdown-toggle" data-toggle="dropdown">{{getUsername()}}</a>
              <div class="dropdown-menu">
+                 <a class="dropdown-item" routerLink="/account">Account</a>
                 <a class="dropdown-item" (click)="doLogout()">Logout</a>
              </div>
          </li>
@@ -28,11 +32,12 @@
 <br><br><br><br>
 <div class="container content">
   <router-outlet></router-outlet>
-  <footer>
+    <br>
+  <footer class="footer text-muted">
     <div class="row">
       <div class="col-12">
-        <small>&copy; WSHFC 2020</small>
+        <small>1000 Second Ave, Suite 2700 Seattle, WA &copy; 2020. All rights reserved.</small>
       </div>
     </div>
-  </footer>
+  </footer>  
 </div>

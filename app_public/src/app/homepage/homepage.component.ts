@@ -14,10 +14,18 @@ export class HomepageComponent implements OnInit {
   
   public pageContent = {
     header:{
-        title:'WSHFC Application Portal',
-        strapline: 'Register to start your application'
+        title:'WSHFC Multifamily Application Portal',
+        strapline: 'Making affordable homes and healthy communities a reality for everyone.'
     },
-    sidebar: 'Contact us at mhcfsupport@wshfc.org for questions or comments about this website'
+    sidebar: {
+        title:'Contact us',
+        strapline: 'Learn more about our programs and how they help your community at ',
+        url: 'www.wshfc.org'
+    },
+    subtitle: 'Making affordable homes and healthy communities a reality for everyone.',
+    register: 'Create an  to begin your application.',
+    registerLink: 'account'
+    
   };
 
 }

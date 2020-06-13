@@ -48,7 +48,7 @@ app.get('/(\/register)|/(\/about)|(\/project\/[a-z0-9]{24})/', function(req, res
 });
 
 // error handlers
-// catch unathorised errors
+// catch unauthorised errors
 app.use((err, req, res, next)=>{
     if(err.name === 'UnauthorizedError'){
         res

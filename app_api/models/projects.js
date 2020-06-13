@@ -30,9 +30,6 @@ const ProjectSchema = new mongoose.Schema({
         enum:['Draft', 'Submitted', null],
         default: 'Draft'
     },
-    owner: {
-        type: String
-    },
     created:{
         type: Date,
         default: Date.now

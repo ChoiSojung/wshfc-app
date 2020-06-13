@@ -39,8 +39,13 @@ export class ProjectDataService {
   
   public addSiteByProjectId(projectId: string, formData: Site): Promise<Site> {
     const url: string = `${this.apiBaseUrl}/projects/${projectId}/sites`;
+    const httpOptions = {
+        headers: new HttpHeaders({
+            'Authorization': `Bearer ${this.storage.getItem('project-token)}`
+        })
+    };
     return this.http
-      .post(url, formData)
+      .post(url, formData, httpOptions)
       .toPromise()
       .then(response => response as Site)
       .catch(this.handleError);

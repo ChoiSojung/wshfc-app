@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
+import { HistoryService } from '../history.service';
 import { User } from '../user';
 
 @Component({
@@ -9,7 +10,10 @@ import { User } from '../user';
 })
 export class FrameworkComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(
+    private authenticationService: AuthenticationService, 
+    private historyService: HistoryService
+    ) { }
 
   ngOnInit() {
   }

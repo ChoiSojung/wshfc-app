@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Project, Site } from '../project';
 import { ProjectDataService } from '../project-data.service';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -11,6 +12,7 @@ export class ProjectDetailComponent implements OnInit {
   @Input() project: Project;
   
   public newSite: Site = {
+    owner: '',
     siteName: '',
     siteAddress: ''
   };
@@ -18,7 +20,10 @@ export class ProjectDetailComponent implements OnInit {
   public formVisible: boolean = false;
   public formError: string;
 
-  constructor(private projectDataService: ProjectDataService) { }
+  constructor(
+    private projectDataService: ProjectDataService,
+    private authenticationService: AuthenticationService
+    ) { }
 
   ngOnInit() {
   }
@@ -31,8 +36,18 @@ export class ProjectDetailComponent implements OnInit {
     }
   }
   
+  public isLoggedIn(): boolean{
+    return this.authenticationService.isLoggedIn();
+  }
+  
+  public getUsername(): string{
+    const { name } = this.authenticationService.getCurrentUser();
+    return name ? name : 'Guest';
+  }
+  
   public onSiteSubmit(): void{
     this.formError='';
+    this.newSite.owner = this.getUsername();
     if(this.formIsValid()){
         console.log(this.newSite);
         this.projectDataService.addSiteByProjectId(this.project._id, this.newSite)

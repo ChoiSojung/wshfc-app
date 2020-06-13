@@ -24,7 +24,7 @@ router
 // sites
 router
     .route('/projects/:projectid/sites')
-    .post(ctrlSites.sitesCreate);
+    .post(auth, ctrlSites.sitesCreate);
 
 router
     .route('/projects/:projectid/sites/:siteid')

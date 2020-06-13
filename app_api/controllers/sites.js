@@ -57,24 +57,26 @@ const doAddSite = (req, res, project)=>{
 
 // Exported create site method
 const sitesCreate = (req, res)=>{
-    const projectId = req.params.projectid;
-    if(projectId){
-        Project
-            .findById(projectId)
-            .select('sites')
-            .exec((err, project)=>{
-                if(err){
-                    res
-                        .status(400)
-                        .json(err);
-                } else {
-                    doAddSite(req, res, project);
-                }
-            });
-    } else {
-        res
-            .status(404)
-            .json({"message": "Project not found"});
+    getUser(req, res, callback)=>{
+        const projectId = req.params.projectid;
+        if(projectId){
+            Project
+                .findById(projectId)
+                .select('sites')
+                .exec((err, project)=>{
+                    if(err){
+                        return res
+                            .status(400)
+                            .json(err);
+                    } else {
+                        doAddSite(req, res, project, userName);
+                    }
+                });
+        } else {
+            res
+                .status(404)
+                .json({"message": "Project not found"});
+        }
     }
 };
 

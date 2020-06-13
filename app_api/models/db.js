@@ -3,6 +3,10 @@ const host = process.env.DB_HOST || '127.0.0.1'
 let dbURI = `mongodb://${host}/hb`;
 const readLine = require('readline');
 
+if (process.env.NODE_ENV === 'production'){
+    dbURI = process.env.MONGODB_URI;
+}
+
 const connect = () => {
   setTimeout(() => mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}), 1000);
 }

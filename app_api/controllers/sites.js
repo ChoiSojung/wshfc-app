@@ -57,7 +57,8 @@ const doAddSite = (req, res, project)=>{
 
 // Exported create site method
 const sitesCreate = (req, res)=>{
-    getUser(req, res, callback)=>{
+    getUser(req, res, 
+        (req, res, username)=>{
         const projectId = req.params.projectid;
         if(projectId){
             Project
@@ -77,7 +78,7 @@ const sitesCreate = (req, res)=>{
                 .status(404)
                 .json({"message": "Project not found"});
         }
-    }
+    });
 };
 
 // Read site

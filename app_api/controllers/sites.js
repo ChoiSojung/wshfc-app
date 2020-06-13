@@ -81,7 +81,6 @@ const sitesCreate = (req, res)=>{
             }
         });
 };
-  
 
 // Read site
 const sitesReadOne = (req, res)=>{

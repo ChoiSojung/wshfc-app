@@ -1,4 +1,5 @@
 export class Site {
+  owner: string;
   siteName: string;
   siteAddress: string
 }

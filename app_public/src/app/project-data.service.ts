@@ -41,7 +41,7 @@ export class ProjectDataService {
     const url: string = `${this.apiBaseUrl}/projects/${projectId}/sites`;
     const httpOptions = {
         headers: new HttpHeaders({
-            'Authorization': `Bearer ${this.storage.getItem('project-token)}`
+            'Authorization': `Bearer ${this.storage.getItem('project-token')}`
         })
     };
     return this.http

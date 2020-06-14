@@ -27,7 +27,6 @@ const getUser = (req, res, callback)=>{
     }
 };
 
-
 // Helper method to add site
 const doAddSite = (req, res, project)=>{
     if(!project){

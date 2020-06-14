@@ -1,7 +1,15 @@
-export class Site {
+export class NewSite {
   siteName: string;
   siteAddress: string;
   owner: string;
+}
+
+export class Site {
+  _id: string;
+  siteName: string;
+  siteAddress: string;
+  owner: string;
+  created: string;
 }
 
 export class Project {

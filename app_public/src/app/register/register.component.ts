@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
-import { HistoryService } from '../history.service';
 
 @Component({
   selector: 'app-register',
@@ -31,8 +30,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private historyService: HistoryService
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(){
@@ -54,7 +52,7 @@ export class RegisterComponent implements OnInit {
   private doRegister(): void{
     this.authenticationService.register(this.credentials)
         .then(()=>{
-            this.router.navigateByUrl(this.historyService.getLastNonLoginUrl());
+            this.router.navigateByUrl('');
         })
         .catch((message)=> {
             this.formError = message

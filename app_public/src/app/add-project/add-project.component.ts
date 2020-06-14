@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectDataService } from '../project-data.service';
 import { NewProject } from '../project';
-import { dbUser } from '../user';
+import { User } from '../user';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -48,12 +48,12 @@ export class AddProjectComponent implements OnInit {
   }
   
   public getUsername(): string {
-    const user: dbUser = this.authenticationService.getCurrentUser();
+    const user: User = this.authenticationService.getCurrentUser();
     return user ? user.name : '';
   }
   
   public getUserId(): string {
-    const user: dbUser = this.authenticationService.getCurrentUser();
+    const user: User = this.authenticationService.getCurrentUser();
     return user ? user._id : '';
   }
   
@@ -65,6 +65,7 @@ export class AddProjectComponent implements OnInit {
         this.projectDataService.addProject(this.newProject)
             .then((project: NewProject)=>{
                 console.log('Project saved', project);
+                this.router.navigateByUrl('/projects');
             });
     } else {
         this.formError = 'All fields required, please try again';

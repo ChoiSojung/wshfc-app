@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Project, NewProject, Site } from './project';
-import { User } from './user';
+import { Project, NewProject, Site, NewSite } from './project';
+import { UserCredential } from './user';
 import { AuthResponse } from './authresponse';
 import { BROWSER_STORAGE } from './storage';
 import { environment } from '../environments/environment';
@@ -37,7 +37,7 @@ export class ProjectDataService {
         .catch(this.handleError);
   }
   
-  public addSiteByProjectId(projectId: string, formData: Site): Promise<Site> {
+  public addSiteByProjectId(projectId: string, formData: NewSite): Promise<NewSite> {
     const url: string = `${this.apiBaseUrl}/projects/${projectId}/sites`;
     const httpOptions = {
         headers: new HttpHeaders({
@@ -47,7 +47,7 @@ export class ProjectDataService {
     return this.http
       .post(url, formData, httpOptions)
       .toPromise()
-      .then(response => response as Site)
+      .then(response => response as NewSite)
       .catch(this.handleError);
   }
   
@@ -70,15 +70,15 @@ export class ProjectDataService {
     return Promise.reject(error.message || error);
   }
   
-  public login(user: User): Promise<AuthResponse>{
+  public login(user: UserCredential): Promise<AuthResponse>{
     return this.makeAuthApiCall('login', user);
   }
   
-  public register(user: User): Promise<AuthResponse>{
+  public register(user: UserCredential): Promise<AuthResponse>{
     return this.makeAuthApiCall('register', user);
   }
   
-  private makeAuthApiCall(urlPath: string, user: User): Promise<AuthResponse> {
+  private makeAuthApiCall(urlPath: string, user: UserCredential): Promise<AuthResponse> {
     const url: string=`${this.apiBaseUrl}/${urlPath}`;
     return this.http
         .post(url, user)

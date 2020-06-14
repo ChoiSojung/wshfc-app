@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { BROWSER_STORAGE } from './storage';
-import { dbUser, User } from './user';
+import { User, UserCredential } from './user';
 import { AuthResponse } from './authresponse';
 import { ProjectDataService } from './project-data.service';
 
@@ -22,13 +22,13 @@ export class AuthenticationService {
     this.storage.setItem('project-token', token);
   }
   
-  public login(user: User): Promise<any> {
+  public login(user: UserCredential): Promise<any> {
     return this.projectDataService.login(user)
         .then((authResp: AuthResponse)=> this.saveToken(authResp.token));
   }
   
   
-  public register(user: User): Promise<any>{
+  public register(user: UserCredential): Promise<any>{
     return this.projectDataService.register(user)
         .then((authResp: AuthResponse)=> this.saveToken(authResp.token));
   }
@@ -47,11 +47,11 @@ export class AuthenticationService {
     }
   }
   
-  public getCurrentUser(): dbUser{
+  public getCurrentUser(): User{
     if(this.isLoggedIn()){
         const token: string = this.getToken();
         const { _id, email, name } = JSON.parse(atob(token.split('.')[1]));
-        return { _id, email, name } as dbUser;
+        return { _id, email, name } as User;
     }
   }
   

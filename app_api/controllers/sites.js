@@ -34,8 +34,9 @@ const doAddSite = (req, res, project)=>{
             .status(404)
             .json({"message": "Project not found"});
     } else {
-        const {siteName, siteAddress} = req.body;
+        const {owner, siteName, siteAddress} = req.body;
         project.sites.push({
+            owner,
             siteName,
             siteAddress
         });
@@ -56,8 +57,6 @@ const doAddSite = (req, res, project)=>{
 
 // Exported create site method
 const sitesCreate = (req, res)=>{
-    getUser(req, res, 
-        (req, res, username)=>{
         const projectId = req.params.projectid;
         if(projectId){
             Project
@@ -69,7 +68,7 @@ const sitesCreate = (req, res)=>{
                             .status(400)
                             .json(err);
                     } else {
-                        doAddSite(req, res, project, userName);
+                        doAddSite(req, res, project);
                     }
                 });
         } else {
@@ -77,7 +76,6 @@ const sitesCreate = (req, res)=>{
                 .status(404)
                 .json({"message": "Project not found"});
         }
-    });
 };
 
 // Read site

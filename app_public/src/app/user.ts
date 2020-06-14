@@ -1,10 +1,11 @@
-export class User {
+export class UserCredential {
     email: string;
     name: string;
 }
 
-export class dbUser {
+export class User {
     _id: string;
     email: string;
     name: string;
+    created: string;
 }

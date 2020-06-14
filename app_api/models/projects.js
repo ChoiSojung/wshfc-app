@@ -9,7 +9,8 @@ const SiteSchema = new mongoose.Schema({
         type: String
     },
     owner: {
-        type: String
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
     },
     created:{
         type: Date,

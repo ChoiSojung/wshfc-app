@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 
 import { AboutComponent } from '../about/about.component';
 import { HomepageComponent } from '../homepage/homepage.component';
@@ -10,6 +10,9 @@ import { LoginComponent } from '../login/login.component';
 import { ProjectListComponent } from '../project-list/project-list.component';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import {
+    AuthGuardService as AuthGuard
+} from '../auth-guard.service';
 
 const routes: Routes =[
     {
@@ -42,8 +45,10 @@ const routes: Routes =[
     },
     {
         path: 'profile',
-        component: UserProfileComponent
-    }
+        component: UserProfileComponent,
+        canActivate: [AuthGuard]
+    },
+    { path: '**', redirectTo: ''}
 ];
 
 @NgModule({
@@ -54,4 +59,5 @@ const routes: Routes =[
   exports:[RouterModule],
   declarations: []
 })
+
 export class AppRoutingModule { }

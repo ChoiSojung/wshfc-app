@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { BROWSER_STORAGE } from './storage';
-import { User } from './user';
+import { dbUser, User } from './user';
 import { AuthResponse } from './authresponse';
 import { ProjectDataService } from './project-data.service';
 
@@ -47,11 +47,11 @@ export class AuthenticationService {
     }
   }
   
-  public getCurrentUser(): User{
+  public getCurrentUser(): dbUser{
     if(this.isLoggedIn()){
         const token: string = this.getToken();
-        const { email, name } = JSON.parse(atob(token.split('.')[1]));
-        return { email, name } as User;
+        const { _id, email, name } = JSON.parse(atob(token.split('.')[1]));
+        return { _id, email, name } as dbUser;
     }
   }
   

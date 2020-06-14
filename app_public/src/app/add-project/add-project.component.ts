@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectDataService } from '../project-data.service';
 import { NewProject } from '../project';
-import { User } from '../user';
+import { dbUser } from '../user';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./add-project.component.css']
 })
 export class AddProjectComponent implements OnInit {  
-  public NewProject: NewProject = {
+  public newProject: NewProject = {
     owner: '',
     name: '',
     address: ''
@@ -36,7 +36,7 @@ export class AddProjectComponent implements OnInit {
   }
   
   private formIsValid(): boolean {
-    if(this.NewProject.name && this.NewProject.address){
+    if(this.newProject.name && this.newProject.address){
         return true;
     } else {
         return false;
@@ -48,16 +48,21 @@ export class AddProjectComponent implements OnInit {
   }
   
   public getUsername(): string {
-    const user: User = this.authenticationService.getCurrentUser();
+    const user: dbUser = this.authenticationService.getCurrentUser();
     return user ? user.name : '';
+  }
+  
+  public getUserId(): string {
+    const user: dbUser = this.authenticationService.getCurrentUser();
+    return user ? user._id : '';
   }
   
   public onNewProjectSubmit(): void{
     this.formError = '';
-    this.NewProject.owner = this.getUsername();
+    this.newProject.owner = this.getUserId();
     if(this.formIsValid()){
-        console.log(this.NewProject);
-        this.projectDataService.addProject(this.NewProject)
+        console.log(this.newProject);
+        this.projectDataService.addProject(this.newProject)
             .then((project: NewProject)=>{
                 console.log('Project saved', project);
             });

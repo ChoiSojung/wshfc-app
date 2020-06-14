@@ -10,6 +10,7 @@ import { LoginComponent } from '../login/login.component';
 import { ProjectListComponent } from '../project-list/project-list.component';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { AddProjectComponent } from '../add-project/add-project.component';
 import {
     AuthGuardService as AuthGuard
 } from '../auth-guard.service';
@@ -34,6 +35,10 @@ const routes: Routes =[
     {
         path: 'projects',
         component: ProjectListComponent
+    },
+    {
+        path: 'projects/new',
+        component: AddProjectComponent
     },
     {
         path: 'project/:projectId',

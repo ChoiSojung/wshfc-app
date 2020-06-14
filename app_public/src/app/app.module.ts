@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
+import { AddProjectComponent } from './add-project/add-project.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     LoginComponent,
     ContactFormComponent,
     UserProfileComponent,
-    SideNavComponent
+    SideNavComponent,
+    AddProjectComponent
   ],
   imports: [
     BrowserModule,

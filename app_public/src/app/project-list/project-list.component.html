@@ -5,8 +5,9 @@
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-4">
-                        <button type="button" class="btn btn-primary add-new"><i class="fa fa-plus"></i>Add New</button>
+                    <div class="col-lg-8">
+                        <!--<button type="button" class="btn btn-primary add-new"><i class="fa fa-plus"></i>Add New</button>-->
+                        <p class="lead">Click <a routerLink="/projects/new">here</a> to start a new application</p>
                     </div>
                 </div>
             </div>
@@ -17,6 +18,7 @@
                         <th>Project Name</th>
                         <th>Project Address</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,6 +26,18 @@
                         <td>{{project.name}}</td>
                         <td>{{project.address}}</td>
                         <td>{{project.status}}</td>
+                        <td>
+                            <a routerLink = "/project/{{project._id}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Project Name value</td>
+                        <td>Project Address value</td>
+                        <td>Project Status value</td>
+                        <td>
+                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                        </td>
                     </tr>
                 </tbody>
             

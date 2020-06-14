@@ -34,11 +34,13 @@ const routes: Routes =[
     },
     {
         path: 'projects',
-        component: ProjectListComponent
+        component: ProjectListComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'projects/new',
-        component: AddProjectComponent
+        component: AddProjectComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'project/:projectId',

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectDataService } from '../project-data.service';
 import { Project } from '../project';
 
-
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',

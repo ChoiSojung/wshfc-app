@@ -9,15 +9,9 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    phone:{
-        type: String
-    },
     name: {
         type: String,
         required: true
-    },
-    account: {
-        type: String
     },
     created:{
         type: Date,

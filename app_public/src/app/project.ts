@@ -1,7 +1,7 @@
 export class Site {
-  owner: string;
   siteName: string;
-  siteAddress: string
+  siteAddress: string;
+  owner: string;
 }
 
 export class Project {
@@ -9,5 +9,13 @@ export class Project {
   name: string;
   address: string;
   status: string;
+  owner: string;
+  created: string;
   sites: Site[];
+}
+
+export class NewProject {
+  name: string;
+  address: string;
+  owner: string;
 }

@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Project, Site } from './project';
+import { Project, NewProject, Site } from './project';
 import { User } from './user';
 import { AuthResponse } from './authresponse';
 import { BROWSER_STORAGE } from './storage';
@@ -48,6 +48,20 @@ export class ProjectDataService {
       .post(url, formData, httpOptions)
       .toPromise()
       .then(response => response as Site)
+      .catch(this.handleError);
+  }
+  
+  public addProject(formData: NewProject): Promise<NewProject> {
+    const url: string = `${this.apiBaseUrl}/projects`;
+    const httpOptions = {
+        headers: new HttpHeaders({
+            'Authorization': `Bearer ${this.storage.getItem('project-token')}`
+        })
+    };
+    return this.http
+      .post(url, formData, httpOptions)
+      .toPromise()
+      .then(response => response as NewProject)
       .catch(this.handleError);
   }
   

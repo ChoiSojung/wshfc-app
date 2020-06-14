@@ -55,10 +55,8 @@ const projectsList = (req, res)=>{
 
 // Create project
 const projectsCreate = (req, res)=>{
-    getUser(req, res,
-        (req, res, userName)=>{
             Project.create({
-                owner: userName,
+                owner: req.body.owner,
                 name: req.body.name,
                 address: req.body.address
             },
@@ -73,9 +71,7 @@ const projectsCreate = (req, res)=>{
                         .json(project);
                 }
             });
-    });
 };
-
 
 // Read project
 const projectsReadOne = (req, res)=>{

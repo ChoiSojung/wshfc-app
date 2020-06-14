@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { HistoryService } from '../history.service';
 import { User } from '../user';
@@ -12,7 +13,8 @@ export class FrameworkComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService, 
-    private historyService: HistoryService
+    private historyService: HistoryService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -20,6 +22,7 @@ export class FrameworkComponent implements OnInit {
   
   public doLogout(): void{
     this.authenticationService.logout();
+    this.router.navigateByUrl('');
   }
   
   public isLoggedIn(): boolean {

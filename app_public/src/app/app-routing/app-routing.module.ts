@@ -24,10 +24,6 @@ const routes: Routes =[
         component: AboutComponent
     },
     {
-        path: 'project/:projectId',
-        component: ProjectDetailPageComponent
-    },
-    {
         path: 'register',
         component: RegisterComponent
     },
@@ -40,6 +36,11 @@ const routes: Routes =[
         component: ProjectListComponent
     },
     {
+        path: 'project/:projectId',
+        component: ProjectDetailPageComponent,
+        canActivate: [AuthGuard]
+    },
+    {
         path: 'contact',
         component: ContactFormComponent
     },
@@ -48,7 +49,16 @@ const routes: Routes =[
         component: UserProfileComponent,
         canActivate: [AuthGuard]
     },
-    { path: '**', redirectTo: ''}
+    {
+        path: '', 
+        redirectTo:'', 
+        pathMatch: 'full'
+    },
+    {
+        path: '**', 
+        redirectTo: '', 
+        pathMatch: 'full'
+    }
 ];
 
 @NgModule({

@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatStepperModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
@@ -39,11 +41,13 @@ import { AddProjectComponent } from './add-project/add-project.component';
     AddProjectComponent
   ],
   imports: [
+    AppRoutingModule,
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule
+	HttpClientModule,
+	MatStepperModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [FrameworkComponent]

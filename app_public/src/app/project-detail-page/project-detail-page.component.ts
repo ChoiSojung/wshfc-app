@@ -28,14 +28,13 @@ export class ProjectDetailPageComponent implements OnInit {
         )
         .subscribe((newProject: Project)=>{
             this.newProject = newProject;
-            this.pageContent.header.title = newProject.name;
-            this.pageContent.sidebar = `${newProject.name}`
+            this.pageContent.header.strapline = newProject.name;
         });
   }
   
   public pageContent = {
     header: {
-        title: '',
+        title: 'Apply',
         strapline: ''
     },
     sidebar: ''

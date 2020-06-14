@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectDataService } from '../project-data.service';
 import { Project } from '../project';
+import { User } from '../user';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-project-list',
@@ -9,7 +11,10 @@ import { Project } from '../project';
 })
 export class ProjectListComponent implements OnInit {
 
-  constructor(private projectDataService: ProjectDataService) { }
+  constructor(
+    private projectDataService: ProjectDataService,
+    private authenticationService: AuthenticationService
+  ) { }
   
   public projects: Project[];
   
@@ -26,12 +31,17 @@ export class ProjectListComponent implements OnInit {
   };
 
   ngOnInit(){
-    this.getProjects();
+    this.getProjects(this.getUserId());
   }
   
-  private getProjects():void {
+  public getUserId(): string {
+    const user: User = this.authenticationService.getCurrentUser();
+    return user ? user._id : '';
+  }
+  
+  private getProjects(userId):void {
     this.projectDataService
-        .getProjects()
+        .getProjectsByUser(userId)
         .then(foundProjects => this.projects = foundProjects);
   }
 

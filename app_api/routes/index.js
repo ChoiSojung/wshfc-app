@@ -16,6 +16,10 @@ router
     .post(ctrlProjects.projectsCreate);
 
 router
+    .route('/:userid/projects')
+    .get(ctrlProjects.projectsByUserList);
+
+router
     .route('/projects/:projectid')
     .get(ctrlProjects.projectsReadOne)
     .put(ctrlProjects.projectsUpdateOne)

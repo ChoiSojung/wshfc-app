@@ -28,6 +28,16 @@ export class ProjectDataService {
         .catch(this.handleError);
   }
   
+  public getProjectsByUser(userId: string): Promise<Project[]>{
+    console.log(environment.production);
+    const url: string=`${this.apiBaseUrl}/${userId}/projects`;
+    return this.http
+        .get(url)
+        .toPromise()
+        .then(response => response as Project[])
+        .catch(this.handleError);
+  }
+  
   public getProjectById(projectId: string): Promise<Project>{
     const url: string=`${this.apiBaseUrl}/projects/${projectId}`;
     return this.http

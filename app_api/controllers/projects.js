@@ -53,6 +53,78 @@ const projectsList = (req, res)=>{
             });
 };
 
+// List projects by user
+const projectsByUserList = (req, res)=>{
+    if(!req.params.userid){
+        return res
+            .status(404)
+            .json({"message": "Not found, userid is required"});
+    }
+    userid = req.params.userid;
+    let projects = [];
+        Project
+            .find({owner: {$in:[userid]}})
+            .exec((err, theseprojects)=>{
+                if(!theseprojects){
+                    console.log('No projects with that user id');
+                    return res
+                        .status(200)
+                        .json({"message": "No projects with that user id"});
+                } else if(err){
+                    console.log('Projects list error: ' + err);
+                    return res
+                        .status(404)
+                        .json(err);
+                } else {
+                    projects = theseprojects
+                    return res
+                        .status(200)
+                        .json(projects);
+                }
+            });
+};
+
+/*if(!req.params.projectid){
+        return res
+            .status(404)
+            .json({
+                "message": "Not found, projectid is required"
+            });
+    }
+    Project
+        .findById(req.params.projectid)
+        .select('-sites')
+        .exec((err, project)=>{
+            if(!project){
+                return res
+                    .status(404)
+                    .json({
+                        "message": "projectid not found"
+                    });
+            } else if (err){
+                return res
+                    .status(400)
+                    .json(err); 
+            }
+            project.name = req.body.name;
+            project.address = req.body.address;
+            project.save((err, project)=>{
+                if(err){
+                    res
+                        .status(404)
+                        .json(err);
+                } else {
+                    res
+                        .status(200)
+                        .json(project);
+                }
+            });
+        });    
+};*/
+
+
+
+
 // Create project
 const projectsCreate = (req, res)=>{
             Project.create({
@@ -161,6 +233,7 @@ const projectsDeleteOne = (req, res)=>{
 
 module.exports = {
     projectsList,
+    projectsByUserList,
     projectsCreate,
     projectsReadOne,
     projectsUpdateOne,

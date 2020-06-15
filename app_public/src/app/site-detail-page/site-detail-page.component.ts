@@ -25,7 +25,7 @@ export class SiteDetailPageComponent implements OnInit {
             switchMap((params: ParamMap)=>{
 				let projectid = params.get('projectId');
 				let siteid = params.get('siteId');
-                return this.projectDataService.getSiteById(projectId, siteId);
+                return this.projectDataService.getSiteById(projectid, siteid);
             })
         )
         .subscribe((newSite: Site)=>{
@@ -33,5 +33,13 @@ export class SiteDetailPageComponent implements OnInit {
             this.pageContent.header.strapline = newSite.siteName;
         });
   }
+  
+  public pageContent = {
+    header: {
+        title: 'Site Detail',
+        strapline: ''
+    },
+    sidebar: ''
+  };
 
 }

@@ -17,7 +17,7 @@
 				
 				<mat-card-content>
 					<button (click)="formVisible=true" class="btn btn-light">Add site</button>
-					<!--<div *ngIf="formVisible">
+					<div *ngIf="formVisible">
 						<br>
 						<form (ngSubmit)="onSiteSubmit()">
 							<div *ngIf="formError" class="alert alert-danger" role="alert">{{ formError }}</div>
@@ -46,31 +46,25 @@
 							  </div>
 							</div>
 							<div class="form-group row">
-								<div class="col-12">
+								<div class="col-13">
 									<button type="submit" class="btn btn-secondary btn-small float-right" style="margin-left:15px">Submit</button>
 									<button (click)="formVisible=false" type="button" class="btn btn-default float-right">Cancel</button>
 								</div>  
 							</div>
 						</form>
-					</div>-->
+					</div>
+					<mat-card *ngFor="let site of project.sites | mostRecentFirst" class="form-card">
+						<div class="card-block">
+							<mat-card-header>
+								<mat-card-subtitle><span [innerHTML]="site.siteName"></span></mat-card-subtitle>
+							</mat-card-header>
+							<mat-card-content>
+								<button class="btn btn-link float-right">Edit Site</button>{{site.siteAddress}}
+							</mat-card-content>
+						</div>
+					</mat-card>
 				</mat-card-content>
 			</mat-card> <!-----matcard end----->
-			<mat-card *ngFor="let site of project.sites" class="form-card">
-				<mat-card-header>
-					<mat-card-subtitle>
-						<p [innerHTML]="site.siteName"></p>
-					</mat-card-subtitle>
-				</mat-card-header>
-				<mat-card-content>
-					<span class="siteAddress"><p class=lead><b>{{ site.siteAddress}}</b></p></span>
-					<button (click)="formVisible=true" class="btn btn-link">Add building</button>
-					<div *ngIf="formVisible">
-						<br>
-						<form (ngSubmit)="onBuildingSubmit()">
-						</form>
-					</div>
-				</mat-card-content>
-			</mat-card>
 			<mat-card-actions>
 			  <button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperNext>Next</button>
       		</mat-card-actions>

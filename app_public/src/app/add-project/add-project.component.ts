@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProjectDataService } from '../project-data.service';
-import { NewProject } from '../project';
+import { NewProject, Project } from '../project';
 import { User } from '../user';
 import { AuthenticationService } from '../authentication.service';
 
@@ -16,12 +16,12 @@ export class AddProjectComponent implements OnInit {
     name: '',
     address: ''
   };
-  
+    
   public formError: string;
 
   public pageContent = {
     header:{
-        title:'Apply',
+        title:'Start your application',
         strapline: ''
     }
   };
@@ -29,6 +29,7 @@ export class AddProjectComponent implements OnInit {
   constructor(
     private projectDataService: ProjectDataService,
     private router: Router,
+	private route: ActivatedRoute,
     private authenticationService: AuthenticationService
   ) { }
   
@@ -63,9 +64,9 @@ export class AddProjectComponent implements OnInit {
     if(this.formIsValid()){
         console.log(this.newProject);
         this.projectDataService.addProject(this.newProject)
-            .then((project: NewProject)=>{
+            .then((project: Project)=>{
                 console.log('Project saved', project);
-                this.router.navigateByUrl('/projects');
+                this.router.navigate(['../../project/', project._id], {relativeTo: this.route});
             });
     } else {
         this.formError = 'All fields required, please try again';

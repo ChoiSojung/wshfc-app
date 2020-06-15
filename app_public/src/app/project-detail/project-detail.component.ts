@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Project, NewSite, Site } from '../project';
 import { User } from '../user';
 import { ProjectDataService } from '../project-data.service';
@@ -25,7 +26,9 @@ export class ProjectDetailComponent implements OnInit {
 
   constructor(
     private projectDataService: ProjectDataService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+	private router: Router,
+	private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
@@ -78,5 +81,6 @@ export class ProjectDetailComponent implements OnInit {
 	this.newSite.legalDesc = '';
 	this.newSite.taxId = '';
   }
+  
 
 }

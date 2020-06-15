@@ -11,6 +11,7 @@ import { ProjectListComponent } from '../project-list/project-list.component';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { AddProjectComponent } from '../add-project/add-project.component';
+import { SiteDetailPageComponent } from '../site-detail-page/site-detail-page.component';
 import {
     AuthGuardService as AuthGuard
 } from '../auth-guard.service';
@@ -47,6 +48,10 @@ const routes: Routes =[
         component: ProjectDetailPageComponent,
         canActivate: [AuthGuard]
     },
+	{
+		path: 'project/:projectId/site/:siteId',
+		component: SiteDetailPageComponent
+	},
     {
         path: 'contact',
         component: ContactFormComponent

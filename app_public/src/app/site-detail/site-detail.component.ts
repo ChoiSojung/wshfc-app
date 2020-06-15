@@ -60,12 +60,12 @@ export class SiteDetailComponent implements OnInit {
     this.newAsset.owner = this.getUserId();
     if(this.formIsValid()){
         console.log(this.newAsset);
-        this.projectDataService.addSiteByProjectId(this.project._id, this.site._id, this.newAsset)
+        this.projectDataService.addAssetByProjectId(this.project._id, this.site._id, this.newAsset)
             .then((asset: Asset)=>{
                 console.log('Asset saved', asset);
                 let assets = this.site.assets.slice(0);
                 assets.unshift(asset);
-                this.sites.assets = assets;
+                this.site.assets = assets;
                 this.resetAndHideForm();
             });
     } else {

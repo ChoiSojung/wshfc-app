@@ -22,9 +22,10 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { AddProjectComponent } from './add-project/add-project.component';
-import { RedstarPipe } from './redstar.pipe';
 import { SiteDetailPageComponent } from './site-detail-page/site-detail-page.component';
 import { SiteDetailComponent } from './site-detail/site-detail.component';
+import { MostRecentFirstPipe } from './most-recent-first.pipe';
+
 
 
 @NgModule({
@@ -43,11 +44,9 @@ import { SiteDetailComponent } from './site-detail/site-detail.component';
     UserProfileComponent,
     SideNavComponent,
     AddProjectComponent,
-    RedstarPipe,
-    AssetDetailComponent,
-    AssetDetailPageComponent,
     SiteDetailPageComponent,
-    SiteDetailComponent
+    SiteDetailComponent,
+    MostRecentFirstPipe
   ],
   imports: [
     AppRoutingModule,

@@ -21,7 +21,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let project of projects">
+                    <tr *ngFor="let project of projects | mostRecentFirst">
                         <td>{{project.name}}</td>
                         <td>{{project.address}}</td>
                         <td>{{project.status}}</td>

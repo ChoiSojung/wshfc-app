@@ -1,78 +1,147 @@
 <div class="row">
   <div class="col-12">
-      
-      <mat-vertical-stepper>
-	  	<mat-step label="Project Summary">
-			
-			<div>
-			  <button mat-button matStepperNext>Next</button>
-      		</div>
-		</mat-step><!--project summary end-->
-		<mat-step label="Site and Building Information">
-			<div>
-			  <button mat-button matStepperPrevious>Back</button>
-			  <button mat-button matStepperNext>Next</button>
-      		</div>
-		</mat-step><!--site and building end-->
-		<mat-step label="Scoring">
-			
-			<div>
-			  <button mat-button matStepperPrevious>Back</button>
-			  <button mat-button matStepperNext>Next</button>
-      		</div>
-		</mat-step><!--scoring end-->
-		<mat-step label="Attachments">
-			
-			<div>
-			  <button mat-button matStepperPrevious>Back</button>
-      		</div>
-		</mat-step><!--attachments end-->
 	  
-	  </mat-vertical-stepper> <!--stepper end-->
-      
-      
-      
-    <!--<div class="card card-primary review-card">
-      <div class="card-block">
-        <button (click)="formVisible=true" class="btn btn-primary float-right">Add site</button>
-        <h2 class="card-title">Sites</h2>
-        <div *ngIf="formVisible">
-          <form (ngSubmit)="onSiteSubmit()">
-            <hr>
-            <h4>Add your site</h4>
-            <div *ngIf="formError" class="alert alert-danger" role="alert">
-              {{ formError }}
-            </div>
-            <div class="form-group row">
-              <label for="siteName" class="col-sm-2 col-form-label">Site Name</label>
-              <div class="col-sm-10">
-                <input [(ngModel)]="newSite.siteName" id="siteName" name="siteName" required="required" class="form-control">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="siteAddress" class="col-sm-2 col-form-label">Site Address</label>
-              <div class="col-sm-10 col-md-2">
-                <input [(ngModel)]="newSite.siteAddress" id="siteAddress" name="siteAddress" required="required" class="form-control">
-              </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary float-right" style="margin-left:15px">Submit</button>
-                    <button (click)="formVisible=false" type="button" class="btn btn-default float-right">Cancel</button>
-                </div>  
-            </div>
-            <hr>
-          </form>
-        </div>
-        <div *ngFor="let site of project.sites" class="row review">
-          <div class="col-12 no-gutters review-header">
-            <span class="siteName">{{ site.siteName }}</span>
-          </div>
-          <div class="col-12">
-            <p [innerHTML]="site.siteAddress"></p>
-          </div>
-        </div>
-      </div>
-    </div>-->
+      <mat-vertical-stepper>
+		  
+	  	<mat-step label="Site and Building Information">
+			
+			<mat-card class="form-card">
+				<mat-card-header>
+					<mat-card-title>
+						Site and Building Information
+					</mat-card-title>
+					<mat-card-subtitle>
+						<span style="color: red">*</span>Field is required
+					</mat-card-subtitle>
+				</mat-card-header>
+				
+				<mat-card-content>
+					<button (click)="formVisible=true" class="btn btn-light">Add site</button>
+					<!--<div *ngIf="formVisible">
+						<br>
+						<form (ngSubmit)="onSiteSubmit()">
+							<div *ngIf="formError" class="alert alert-danger" role="alert">{{ formError }}</div>
+							<div class="form-group row">
+							  <label for="siteName" class="col-sm-2 col-form-label">*Site Name:</label>
+							  <div class="col-sm-10">
+								<input [(ngModel)]="newSite.siteName" id="siteName" name="siteName" required="required" class="form-control">
+							  </div>
+							</div>
+							<div class="form-group row">
+							  <label for="siteAddress" class="col-sm-2 col-form-label">*Address:</label>
+							  <div class="col-sm-10">
+								<input [(ngModel)]="newSite.siteAddress" id="siteAddress" name="siteAddress" required="required" class="form-control">
+							  </div>
+							</div>
+							<div class="form-group row">
+							  <label for="legalDesc" class="col-sm-2 col-form-label">Legal:</label>
+							  <div class="col-sm-10">
+								<input [(ngModel)]="newSite.legalDesc" id="legalDesc" name="legalDesc" required="required" class="form-control">
+							  </div>
+							</div>
+							<div class="form-group row">
+							  <label for="taxId" class="col-sm-2 col-form-label">Tax Id:</label>
+							  <div class="col-sm-10">
+								<input [(ngModel)]="newSite.taxId" id="taxId" name="taxId" required="required" class="form-control">
+							  </div>
+							</div>
+							<div class="form-group row">
+								<div class="col-12">
+									<button type="submit" class="btn btn-secondary btn-small float-right" style="margin-left:15px">Submit</button>
+									<button (click)="formVisible=false" type="button" class="btn btn-default float-right">Cancel</button>
+								</div>  
+							</div>
+						</form>
+					</div>-->
+				</mat-card-content>
+			</mat-card> <!-----matcard end----->
+			<mat-card *ngFor="let site of project.sites" class="form-card">
+				<mat-card-header>
+					<mat-card-subtitle>
+						<p [innerHTML]="site.siteName"></p>
+					</mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-content>
+					<span class="siteAddress"><p class=lead><b>{{ site.siteAddress}}</b></p></span>
+					<button (click)="formVisible=true" class="btn btn-link">Add building</button>
+					<div *ngIf="formVisible">
+						<br>
+						<form (ngSubmit)="onBuildingSubmit()">
+						</form>
+					</div>
+				</mat-card-content>
+			</mat-card>
+			<mat-card-actions>
+			  <button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperNext>Next</button>
+      		</mat-card-actions>
+		</mat-step><!-----site and building summary end----->
+		  
+		  
+		  
+		  
+		<mat-step label="Project Summary">
+			<mat-card class="form-card">
+				<mat-card-header>
+					<mat-card-title>
+						Project Summary
+					</mat-card-title>
+					<mat-card-subtitle>
+					  <span style="color: red">*</span>Field is required
+					</mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-content>
+					<p>My content</p>
+				</mat-card-content>
+			</mat-card><!-----matcard end----->
+			<mat-card-actions>
+				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperNext>Next</button>
+				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperPrevious>Previous</button>
+			</mat-card-actions>
+		</mat-step><!-----project summary end----->
+		  
+		  
+		  
+		  
+		<mat-step label="Scoring">
+			<mat-card class="form-card">
+				<mat-card-header>
+					<mat-card-title>
+						Scoring
+					</mat-card-title>
+					<mat-card-subtitle>
+						<span style="color: red">*</span>Field is required
+					</mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-content>
+					<p>My content</p>
+				</mat-card-content>
+			</mat-card><!-----matcard end----->
+			<mat-card-actions>
+				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperNext>Next</button>
+				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperPrevious>Previous</button>
+			</mat-card-actions>
+		</mat-step><!-----scoring end----->
+		<mat-step label="Attachments">
+			<mat-card class="form-card">
+				<mat-card-header>
+					<mat-card-title>
+						Attachments
+					</mat-card-title>
+					<mat-card-subtitle>
+						<span style="color: red">*</span>Field is required
+					</mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-content>
+					<p>My content</p>
+				</mat-card-content>
+			</mat-card><!-----matcard end----->
+			<mat-card-actions>
+				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperNext>Next</button>
+				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperPrevious>Previous</button>
+			</mat-card-actions>
+		</mat-step><!--attachments end----->
+	  </mat-vertical-stepper> <!-----stepper end----->  
+	  
+	 
   </div>
 </div>

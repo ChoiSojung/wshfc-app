@@ -1,6 +1,30 @@
 const mongoose = require('mongoose');
 
+const AssetSchema = new mongoose.Schema({
+	owner: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    },
+    created:{
+        type: Date,
+        default: Date.now
+    },
+	"assetName": String,
+	"assetAddress": String,
+	"lih": Number,
+	"cau": Number,
+	"mu": Number
+});
+
 const SiteSchema = new mongoose.Schema({
+	owner: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    },
+    created:{
+        type: Date,
+        default: Date.now
+    },
     siteName: {
         type: String,
         required: true
@@ -8,17 +32,65 @@ const SiteSchema = new mongoose.Schema({
     siteAddress: {
         type: String
     },
-    owner: {
+	assets:[AssetSchema]
+});
+
+const FundingSchema = new mongoose.Schema({
+	owner: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     },
     created:{
         type: Date,
         default: Date.now
-    }
+    },
+	"sponsor": String,
+	"cosponsor": String,
+	"consultant": String,
+	"program": String,
+	"contactIsConsultant": Boolean,
+	"ownership": String,
+	"ownershipType": String,
+	"ownershipState": String,
+	"lender": String,
+	"investor": String,
+	"previousCommissionFinancing": Boolean,
+	"dda": String,
+	"qct": String,
+	"federalSetAside": String,
+	"allocationType": String,
+	"firstCreditYear": String,
+	"estimatedCredit": Number,
+	"taxCreditFactor": Number,
+	"anticipatedClosing": String,
+	"totalProjectCost": Number,
+	"totalDevelopmentCost": Number,
+	"totalDevelopmentCostLimit": Number,
+	"tdcWaiver": Boolean,
+	"studio": Number,
+	"oneBdrm": Number,
+	"twoBdrm": Number,
+	"threeBdrm": Number,
+	"fourBdrm": Number,
+	"fiveBdrm": Number,
+	"disabled":Number,
+	"elderly":Number,
+	"homeless":Number,
+	"largehh":Number,
+	"farmworker":Number,
+	"taxExemptBond": Number,
+	"taxableBond": Number
 });
 
 const ProjectSchema = new mongoose.Schema({
+	owner: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    },
+    created:{
+        type: Date,
+        default: Date.now
+    },
     name: {
         type: String,
         required: true
@@ -31,15 +103,8 @@ const ProjectSchema = new mongoose.Schema({
         enum:['Draft', 'Submitted', null],
         default: 'Draft'
     },
-    owner: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'User'
-    },
-    created:{
-        type: Date,
-        default: Date.now
-    },
-    sites:[SiteSchema] 
+    sites:[SiteSchema],
+	fundings: [FundingSchema]
 });
 
 mongoose.model('Project', ProjectSchema);

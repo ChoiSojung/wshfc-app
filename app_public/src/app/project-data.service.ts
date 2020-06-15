@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Project, NewProject, Site, NewSite } from './project';
+import { Project, NewProject, Site, NewSite, Asset, NewAsset } from './project';
 import { UserCredential } from './user';
 import { AuthResponse } from './authresponse';
 import { BROWSER_STORAGE } from './storage';
@@ -47,6 +47,15 @@ export class ProjectDataService {
         .catch(this.handleError);
   }
   
+  public getSiteById(projectId: string, siteId: string): Promise<Site>{
+    const url: string=`${this.apiBaseUrl}/projects/${projectId}/sites/${siteId}`;
+    return this.http
+        .get(url)
+        .toPromise()
+        .then(response => response as Site)
+        .catch(this.handleError);
+  }
+  
   public addSiteByProjectId(projectId: string, formData: NewSite): Promise<NewSite> {
     const url: string = `${this.apiBaseUrl}/projects/${projectId}/sites`;
     const httpOptions = {
@@ -58,6 +67,20 @@ export class ProjectDataService {
       .post(url, formData, httpOptions)
       .toPromise()
       .then(response => response as NewSite)
+      .catch(this.handleError);
+  }
+  
+  public addAssetByProjectId(projectId: string, siteId: string, formData: NewAsset): Promise<NewAsset>{
+  	const url: string=`${this.apiBaseUrl}/projects/${projectId}/sites/${siteId}/assets`;
+	const httpOptions = {
+        headers: new HttpHeaders({
+            'Authorization': `Bearer ${this.storage.getItem('project-token')}`
+        })
+    };
+    return this.http
+      .post(url, formData, httpOptions)
+      .toPromise()
+      .then(response => response as Asset)
       .catch(this.handleError);
   }
   

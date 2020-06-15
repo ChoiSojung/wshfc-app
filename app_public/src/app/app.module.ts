@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
@@ -21,6 +22,9 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { AddProjectComponent } from './add-project/add-project.component';
+import { RedstarPipe } from './redstar.pipe';
+import { SiteDetailPageComponent } from './site-detail-page/site-detail-page.component';
+import { SiteDetailComponent } from './site-detail/site-detail.component';
 
 
 @NgModule({
@@ -38,7 +42,12 @@ import { AddProjectComponent } from './add-project/add-project.component';
     ContactFormComponent,
     UserProfileComponent,
     SideNavComponent,
-    AddProjectComponent
+    AddProjectComponent,
+    RedstarPipe,
+    AssetDetailComponent,
+    AssetDetailPageComponent,
+    SiteDetailPageComponent,
+    SiteDetailComponent
   ],
   imports: [
     AppRoutingModule,
@@ -46,6 +55,7 @@ import { AddProjectComponent } from './add-project/add-project.component';
     BrowserModule,
     FormsModule,
 	HttpClientModule,
+	MatCardModule,
 	MatStepperModule,
     ReactiveFormsModule
   ],

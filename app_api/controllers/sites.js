@@ -146,8 +146,8 @@ const sitesUpdateOne = (req, res)=>{
                         .status(404)
                         .json({"message": "Site not found"});
                 } else {
-                    thisReview.siteName = req.body.siteName;
-                    this.Review.siteAddress = req.body.siteAddress;
+                    thisSite.siteName = req.body.siteName;
+                    thisSite.siteAddress = req.body.siteAddress;
                     project.save((err, project)=>{
                         if(err){
                             res
@@ -167,7 +167,6 @@ const sitesUpdateOne = (req, res)=>{
             }
         });
 };
-
 
 // Delete site
 const sitesDeleteOne = (req, res)=>{

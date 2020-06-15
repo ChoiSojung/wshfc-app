@@ -8,6 +8,7 @@ const auth = jwt({
 const ctrlProjects = require('../controllers/projects');
 const ctrlSites = require('../controllers/sites');
 const ctrlAuth = require('../controllers/authentication');
+const ctrlAssets = require('../controllers/assets');
 
 // projects
 router
@@ -28,13 +29,24 @@ router
 // sites
 router
     .route('/projects/:projectid/sites')
-    .post(auth, ctrlSites.sitesCreate);
+    .post(ctrlSites.sitesCreate);
 
 router
     .route('/projects/:projectid/sites/:siteid')
     .get(ctrlSites.sitesReadOne)
     .put(ctrlSites.sitesUpdateOne)
     .delete(ctrlSites.sitesDeleteOne);
+
+// assets
+router
+	.route('/projects/:projectid/sites/:siteid/assets')
+	.post(ctrlAssets.assetsCreate);
+
+router
+	.route('/projects/:projectid/sites/:siteid/assets/:assetid')
+	.get(ctrlAssets.assetsReadOne)
+	.put(ctrlAssets.assetsUpdateOne)
+	.delete(ctrlAssets.assetsDeleteOne)
 
 
 // authentication

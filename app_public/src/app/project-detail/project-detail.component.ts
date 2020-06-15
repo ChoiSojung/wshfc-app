@@ -15,7 +15,9 @@ export class ProjectDetailComponent implements OnInit {
   public newSite: NewSite = {
     owner: '',
     siteName: '',
-    siteAddress: ''
+    siteAddress: '',
+	legalDesc: '',
+	taxId: ''
   };
   
   public formVisible: boolean = false;
@@ -62,17 +64,19 @@ export class ProjectDetailComponent implements OnInit {
                 let sites = this.project.sites.slice(0);
                 sites.unshift(site);
                 this.project.sites = sites;
-                this.resetAndHideReviewForm();
+                this.resetAndHideForm();
             });
     } else {
         this.formError = 'All fields required, please try again';
     }
   }
   
-  private resetAndHideReviewForm(): void {
+  private resetAndHideForm(): void {
     this.formVisible = false;
     this.newSite.siteName = '';
     this.newSite.siteAddress = '';
+	this.newSite.legalDesc = '';
+	this.newSite.taxId = '';
   }
 
 }

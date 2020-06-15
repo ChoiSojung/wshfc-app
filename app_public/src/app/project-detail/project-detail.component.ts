@@ -161,6 +161,7 @@ export class ProjectDetailComponent implements OnInit {
     this.fundingFormError='';
     this.newFunding.owner = this.getUserId();
 	this.newFunding.projectRef = this.project._id;
+	this.project.status = "Submitted";
 	this.setNewFundingValues();
     
 	this.projectDataService.addFundingByProjectId(this.project._id, this.newFunding)

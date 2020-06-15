@@ -53,6 +53,10 @@ const FundingSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     },
+	projectRef: {
+		type: mongoose.Schema.ObjectId,
+		ref: 'Project'
+	},
     created:{
         type: Date,
         default: Date.now

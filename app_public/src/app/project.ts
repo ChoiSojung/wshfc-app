@@ -82,12 +82,12 @@ export class NewFunding {
   totalDevelopmentCost: number;
   totalDevelopmentCostLimit: number;
   tdcWaiver: boolean;
-  studios: number;
-  oneBdrms: number;
-  twoBdrms: number;
-  threeBdrms: number;
-  fourBdrms: number;
-  fiveBdrms: number;
+  studio: number;
+  oneBdrm: number;
+  twoBdrm: number;
+  threeBdrm: number;
+  fourBdrm: number;
+  fiveBdrm: number;
   disabled:number;
   elderly:number;
   homeless:number;

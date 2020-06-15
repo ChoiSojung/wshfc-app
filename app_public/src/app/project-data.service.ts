@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Project, NewProject, Site, NewSite, Asset, NewAsset } from './project';
+import { Project, NewProject, Site, NewSite, Asset, NewAsset, Funding, NewFunding } from './project';
 import { UserCredential } from './user';
 import { AuthResponse } from './authresponse';
 import { BROWSER_STORAGE } from './storage';
@@ -96,6 +96,21 @@ export class ProjectDataService {
       .toPromise()
       .then(response => response as Asset)
       .catch(this.handleError);
+  }
+  
+  public addFundingByProjectId(projectId: string, formData: NewFunding): Promise<NewFunding>{
+  	const url: string = `${this.apiBaseUrl}/projects/${projectId}/fundings`;
+    const httpOptions = {
+        headers: new HttpHeaders({
+            'Authorization': `Bearer ${this.storage.getItem('project-token')}`
+        })
+    };
+    return this.http
+      .post(url, formData, httpOptions)
+      .toPromise()
+      .then(response => response as NewFunding)
+      .catch(this.handleError);
+  
   }
   
   private handleError(error: any): Promise<any>{

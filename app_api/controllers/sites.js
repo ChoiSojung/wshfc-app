@@ -120,7 +120,7 @@ const sitesUpdateOne = (req, res)=>{
     if(!req.params.projectid || !req.params.siteid){
         return res
             .status(404)
-            .json({"message": "Location id and review id were not found"});
+            .json({"message": "Project and sit ids were not found"});
     }
     Project
         .findById(req.params.projectid)

@@ -1,3 +1,7 @@
 .form-card {
   margin: 1rem;
 }
+
+.table > thead > tr > th {
+     vertical-align: middle;
+}

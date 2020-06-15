@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12">
-	  
+
       <mat-vertical-stepper>
 		  
 	  	<mat-step label="Site Information">
@@ -46,7 +46,7 @@
 							</div>
 							<div class="form-group row">
 								<div class="col-13">
-									<button type="submit" class="btn btn-secondary btn-small float-right" style="margin-left:15px">Submit</button>
+									<button type="submit" class="btn btn-secondary btn-small float-right" style="margin-left:15px">Save</button>
 									<button (click)="siteFormVisible=false" type="button" class="btn btn-default float-right">Cancel</button>
 								</div>  
 							</div>
@@ -58,7 +58,7 @@
 								<mat-card-subtitle><span [innerHTML]="site.siteName"></span></mat-card-subtitle>
 							</mat-card-header>
 							<mat-card-content>
-								<button routerLink="{{'site/'+site._id}}" class="btn-link btn-sm float-right">Add building</button>{{site.siteAddress}}									
+								<button routerLink="{{'site/'+site._id}}" class="btn btn-link float-right">Add building</button>{{site.siteAddress}}									
 							</mat-card-content>
 						</div>
 					</mat-card>
@@ -69,44 +69,228 @@
       		</mat-card-actions>
 		</mat-step><!-----site and building summary end----->
 		<mat-step label="Project Summary">
+			<form [formGroup]="fundingForm" (ngSubmit)="onFundingSubmit()">
+
 			<mat-card class="form-card">
 				<mat-card-header>
 					<mat-card-title>
-						Project Summary
+						Project Detail
 					</mat-card-title>
 					<mat-card-subtitle>
 					  <span style="color: red">*</span>Field is required
 					</mat-card-subtitle>
 				</mat-card-header>
 				<mat-card-content>
-					<p>My content</p>
+							<div *ngIf="fundingFormError" class="alert alert-danger" role="alert">{{ fundingFormError }}</div>
+							<div class="form-group row">
+							  <div class="col">
+								<input class="form-control" id="sponsor" type="text" formControlName="sponsor" placeholder="*Sponsor" required>
+							  </div>
+							  <div class="col">
+								<select class="custom-select" formControlName= "program"  id="program" required>
+								  <option selected>Program Type</option>
+								  <option *ngFor="let item of programList" [ngValue]="item.name">{{item.name}}</option>
+								</select>
+							  </div>
+								<!--<p>Form status: {{fundingForm.status}}</p>-->
+							</div>
+						    <div class="form-group row">
+							  <div class="col">
+								<input class="form-control" id="cosponsor" type="text" formControlName="cosponsor" placeholder="Co-Sponsor">
+							  </div>
+							  <div class="col">
+								<input class="form-control" id="consultant" type="text" formControlName="consultant" placeholder="Development Consultant">
+							  </div>
+							</div>
+						    <div class="form-group row">
+							  <div class="col">
+								<input class="form-control" id="ownership" type="text" formControlName="ownership" placeholder="Ownership Entity">
+							  </div>
+							  <div class="col">
+								<input class="form-control" id="lender" type="text" formControlName="lender" placeholder="Lender">
+							  </div>
+							  <div class="col">
+								<input class="form-control" id="investor" type="text" formControlName="investor" placeholder="Investor">
+							  </div>
+							</div>
 				</mat-card-content>
 			</mat-card><!-----matcard end----->
-			<mat-card-actions>
-				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperNext>Next</button>
-				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperPrevious>Previous</button>
-			</mat-card-actions>
-		</mat-step><!-----project summary end----->
-		<mat-step label="Attachments">
+		
+			<mat-card class="form-card">
+				<mat-card-header>
+					<mat-card-title>
+						Tax Credit Information
+					</mat-card-title>
+					<mat-card-subtitle>
+					  <span style="color: red">*</span>Field is required
+					</mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-content>
+					<div>
+						<div class="form-check">
+						  <input class="form-check-input" type="checkbox" value="" id="dda" formControlName="dda">
+						  <label class="form-check-label" for="dda">Located in Difficult to Develop Area (DDA)</label>
+						</div>
+						<div class="form-check">
+						  <input class="form-check-input" type="checkbox" value="" id="qct" formControlName="qct">
+						  <label class="form-check-label" for="qct">Located in a Qualified Census Tract (QCT)</label>
+						</div>
+						<br>
+					</div>
+					<div class="form-group row">
+						<div class="col">
+							<select formControlName = "federalSetAside" class="browser-default custom-select" id="federalSetAside">
+							  <option *ngFor="let item of setAsideList" [ngValue]="item.name">{{item.name}}</option>
+							</select>
+						  </div>
+					</div>
+					<div class="form-group row">
+						  <div class="col">
+							<select formControlName = "allocationType" class="browser-default custom-select" id="allocationType">
+							  <option *ngFor="let item of allocationTypeList" [ngValue]="item.name">{{item.name}}</option>
+							</select>
+						  </div>
+					</div>
+					<div class="form-group row">
+					  <div class="col">
+						<input class="form-control" id="firstCreditYear" type="text" formControlName="firstCreditYear" placeholder = "First Credit Year">
+					  </div>
+					  <div class="col">
+						<input class="form-control" id="estimatedCredit" type="text" formControlName="estimatedCredit" placeholder = "Requested Credit Amount">
+					  </div>
+					  <div class="col">
+						<input class="form-control" id="taxCreditFactor" type="text" formControlName="taxCreditFactor" placeholder = "Tax Credit Factor">
+					  </div>
+					</div>
+				</mat-card-content>
+			</mat-card><!-----matcard end----->
+			
+			<mat-card class="form-card">
+				<mat-card-header>
+					<mat-card-title>
+						Financing Information
+					</mat-card-title>
+					<mat-card-subtitle>
+					  <span style="color: red">*</span>Field is required
+					</mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-content>
+					<div class="form-group row">
+					  <div class="col">
+						<input class="form-control" id="anticipatedClosing" type="text" formControlName="anticipatedClosing" placeholder="Anticipated Closing Month/Year">
+					  </div>
+					  <div class="col">
+						<input class="form-control" id="totalProjectCost" type="text" formControlName="totalProjectCost" placeholder = "Total Project Cost">
+					  </div>
+					</div>
+					<div class="form-group row">
+						<div class="col">
+						<input class="form-control" id="totalDevelopmentCost" type="text" formControlName="totalDevelopmentCost" placeholder = "Total Development Cost">
+					</div>
+					  <div class="col">
+						
+					
+					  <div class="form-check form-check-inline">
+						  
+						  <input class="form-check-input" type="checkbox" value="" id="tdcWaiver" formControlName="tdcWaiver">
+						  <label class="form-check-label" for="tdcWaiver">TDC Waiver Submitted</label>
+						  
+						</div>
+					  </div>
+					</div>
+				</mat-card-content>
+			</mat-card><!-----matcard end----->
+			
+			<mat-card class="form-card">
+				<mat-card-header>
+					<mat-card-title>
+						Unit Information
+					</mat-card-title>
+					<mat-card-subtitle>
+					  <span style="color: red">*</span>Field is required
+					</mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-content>
+					<div class="form-group row">
+					  <div class="col">
+						<input class="form-control" id="studio" type="text" formControlName="studio">
+					  </div>
+					  <div class="col">
+						<input class="form-control" id="oneBdrm" type="text" formControlName="oneBdrm">
+					  </div>
+					</div>
+					<div class="form-group row">
+					  <div class="col">
+						<input class="form-control" id="twoBdrm" type="text" formControlName="twoBdrm">
+					  </div>
+					  <div class="col">
+						<input class="form-control" id="threeBdrm" type="text" formControlName="threeBdrm">
+					  </div>
+					</div>
+					<div class="form-group row">
+					  <div class="col">
+						<input class="form-control" id="fourBdrm" type="text" formControlName="fourBdrm">
+					  </div>
+					  <div class="col">
+						<input class="form-control" id="fiveBdrm" type="text" formControlName="fiveBdrm">
+					  </div>
+					</div>
+				</mat-card-content>
+			</mat-card><!-----matcard end----->
+			
+			<mat-card class="form-card">
+				<mat-card-header>
+					<mat-card-title>
+						Units Set-Aside for Special Populations
+					</mat-card-title>
+					<mat-card-subtitle>
+					  <span style="color: red">*</span>Field is required
+					</mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-content>
+					<div class="form-group row">
+					  <div class="col">
+						<input class="form-control" id="homeless" type="text" formControlName="homeless">
+					  </div>
+
+					  <div class="col">
+						<input class="form-control" id="largehh" type="text" formControlName="largehh">
+					  </div>
+					</div>
+					<div class="form-group row">
+					  <div class="col">
+						<input class="form-control" id="elderly" type="text" formControlName="elderly">
+					  </div>
+					  <div class="col">
+						<input class="form-control" id="disabled" type="text" formControlName="disabled">
+					  </div>
+					</div>
+					<div class="form-group row">
+					  <div class="col-sm-6">
+						<input class="form-control" id="farmworker" type="text" formControlName="farmworker">
+					  </div>
+					</div>
+				</mat-card-content>
+			</mat-card><!-----matcard end----->
+			
 			<mat-card class="form-card">
 				<mat-card-header>
 					<mat-card-title>
 						Attachments
 					</mat-card-title>
-					<mat-card-subtitle>
-						<span style="color: red">*</span>Field is required
-					</mat-card-subtitle>
 				</mat-card-header>
 				<mat-card-content>
-					<p>My content</p>
+					<input class="file-input" type="file">
 				</mat-card-content>
 			</mat-card><!-----matcard end----->
 			<mat-card-actions>
-				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperNext>Next</button>
-				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperPrevious>Previous</button>
+				<button type="submit" class="btn btn-outline-primary float-right" >Submit</button>
 			</mat-card-actions>
+			</form>
 		</mat-step><!--attachments end----->
+
 	  </mat-vertical-stepper> <!-----stepper end----->  
+
 	  
 	 
   </div>

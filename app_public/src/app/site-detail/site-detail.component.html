@@ -11,7 +11,7 @@
 				</mat-card-header>
 				
 				<mat-card-content>
-					<button (click)="assetFormVisible=true" class="btn btn-light">Add building</button>
+					<button (click)="assetFormVisible=true" class="btn btn-light">New building</button>
 					<div *ngIf="assetFormVisible">
 						<br>
 						<form (ngSubmit)="onAssetSubmit()">
@@ -48,19 +48,35 @@
 							</div>
 						</form>
 					</div>
-					<mat-card *ngFor="let asset of site.assets | mostRecentFirst" class="form-card">
+					<mat-card class="form-card">
 						<div class="card-block">
-							<mat-card-header>
-								<mat-card-subtitle><span [innerHTML]="asset.assetName"></span></mat-card-subtitle>
-							</mat-card-header>
 							<mat-card-content>
-								{{asset.assetAddress}}
+								<table class="table table-bordered">
+								  <caption>List of buildings</caption>
+								  <thead>
+									<tr>
+									  <th scope="col">Address</th>
+									  <th scope="col">Low-Income Housing Units</th>
+									  <th scope="col">Common Area Units</th>
+									  <th scope="col">Market Rate Housing Units</th>
+									</tr>
+								  </thead>
+								  <tbody>
+									<tr *ngFor="let asset of site.assets | mostRecentFirst">
+									  <td><span [innerHTML] = "asset.assetAddress"></span></td>
+									  <td><span [innerHTML] = "asset.lih"></span></td>
+									  <td><span [innerHTML] = "asset.cau"></span></td>
+									  <td><span [innerHTML] = "asset.mu"></span></td>
+									</tr>
+								  </tbody>
+								</table>
 							</mat-card-content>
 						</div>
 					</mat-card>
 					</mat-card-content>
 		</mat-card> <!-----matcard end----->
 		<mat-card-actions>
+			<button (click)="wizard()" class="btn btn-secondary btn-small" style="margin-left:15px">Back</button>
 		</mat-card-actions>
 	</div>
 </div>

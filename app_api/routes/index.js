@@ -9,6 +9,7 @@ const ctrlProjects = require('../controllers/projects');
 const ctrlSites = require('../controllers/sites');
 const ctrlAuth = require('../controllers/authentication');
 const ctrlAssets = require('../controllers/assets');
+const ctrlFundings = require('../controllers/fundings');
 
 // projects
 router
@@ -47,6 +48,16 @@ router
 	.get(ctrlAssets.assetsReadOne)
 	.put(ctrlAssets.assetsUpdateOne)
 	.delete(ctrlAssets.assetsDeleteOne)
+
+// fundings
+router
+    .route('/projects/:projectid/fundings')
+    .post(ctrlFundings.fundingsCreate);
+
+router
+    .route('/projects/:projectid/fundings/:fundingid')
+    .get(ctrlFundings.fundingsReadOne)
+    .put(ctrlFundings.fundingsUpdateOne);
 
 
 // authentication

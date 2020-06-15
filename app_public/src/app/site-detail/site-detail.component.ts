@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Project, Site, NewAsset, Asset } from '../project';
 import { User } from '../user';
 import { ProjectDataService } from '../project-data.service';
 import { AuthenticationService } from '../authentication.service';
+import { HistoryService } from '../history.service';
 
 @Component({
   selector: 'app-site-detail',
@@ -26,7 +28,9 @@ export class SiteDetailComponent implements OnInit {
 
   constructor(
     private projectDataService: ProjectDataService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+	private historyService: HistoryService,
+	private router: Router
     ) { }
 
   ngOnInit() {
@@ -71,6 +75,10 @@ export class SiteDetailComponent implements OnInit {
     } else {
         this.assetFormError = 'All fields required, please try again';
     }
+  }
+  
+  public wizard(): void {
+  	this.router.navigateByUrl(this.historyService.getPreviousUrl());
   }
   
   private resetAndHideAssetForm(): void {

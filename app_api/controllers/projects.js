@@ -84,46 +84,6 @@ const projectsByUserList = (req, res)=>{
             });
 };
 
-/*if(!req.params.projectid){
-        return res
-            .status(404)
-            .json({
-                "message": "Not found, projectid is required"
-            });
-    }
-    Project
-        .findById(req.params.projectid)
-        .select('-sites')
-        .exec((err, project)=>{
-            if(!project){
-                return res
-                    .status(404)
-                    .json({
-                        "message": "projectid not found"
-                    });
-            } else if (err){
-                return res
-                    .status(400)
-                    .json(err); 
-            }
-            project.name = req.body.name;
-            project.address = req.body.address;
-            project.save((err, project)=>{
-                if(err){
-                    res
-                        .status(404)
-                        .json(err);
-                } else {
-                    res
-                        .status(200)
-                        .json(project);
-                }
-            });
-        });    
-};*/
-
-
-
 
 // Create project
 const projectsCreate = (req, res)=>{

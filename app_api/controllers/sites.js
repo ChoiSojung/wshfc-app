@@ -34,11 +34,14 @@ const doAddSite = (req, res, project)=>{
             .status(404)
             .json({"message": "Project not found"});
     } else {
-        const {owner, siteName, siteAddress} = req.body;
+        const {owner, projectRef, siteName, siteAddress, legalDesc, taxId} = req.body;
         project.sites.push({
             owner,
+			projectRef,
             siteName,
-            siteAddress
+            siteAddress,
+			legalDesc,
+			taxId
         });
         project.save((err, project)=>{
             if(err){
@@ -55,7 +58,7 @@ const doAddSite = (req, res, project)=>{
     }
 };
 
-// Exported create site method
+// Create site
 const sitesCreate = (req, res)=>{
         const projectId = req.params.projectid;
         if(projectId){
@@ -82,7 +85,7 @@ const sitesCreate = (req, res)=>{
 const sitesReadOne = (req, res)=>{
     Project
         .findById(req.params.projectid)
-        .select('name sites')
+        .select('sites')
         .exec((err, project)=>{
             if(!project){
                 return res
@@ -100,16 +103,9 @@ const sitesReadOne = (req, res)=>{
                         .status(404)
                         .json({"message":"site not found"});
                 } else {
-                    const response = {
-                        project: {
-                            name: project.name,
-                            id: req.params.projectid
-                        },
-                        site
-                    };
                     return res
                         .status(200)
-                        .json(response);
+                        .json(site);
                 }
             } else {
                 return res
@@ -148,6 +144,8 @@ const sitesUpdateOne = (req, res)=>{
                 } else {
                     thisSite.siteName = req.body.siteName;
                     thisSite.siteAddress = req.body.siteAddress;
+					thisSite.legalDesc = req.body.legalDesc;
+					thisSite.taxId = req.body.taxId;
                     project.save((err, project)=>{
                         if(err){
                             res

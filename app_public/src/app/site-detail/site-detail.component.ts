@@ -11,11 +11,10 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class SiteDetailComponent implements OnInit {
   @Input() site: Site;
-  @Input() project: Project;
   
   public newAsset: NewAsset = {
     owner: '',
-	assetName: '',
+	siteRef: '',
 	assetAddress: '',
 	lih: 0,
 	cau: 0,
@@ -34,7 +33,7 @@ export class SiteDetailComponent implements OnInit {
   }
   
   private assetFormIsValid(): boolean {
-  	if(this.newAsset.assetName && this.newAsset.assetAddress){
+  	if(this.newAsset.assetAddress){
         return true;
     } else {
         return false;
@@ -58,9 +57,10 @@ export class SiteDetailComponent implements OnInit {
   public onAssetSubmit(): void{
     this.assetFormError='';
     this.newAsset.owner = this.getUserId();
+	this.newAsset.siteRef = this.site._id;
     if(this.assetFormIsValid()){
         console.log(this.newAsset);
-        this.projectDataService.addAssetByProjectId(this.project._id, this.site._id, this.newAsset)
+        this.projectDataService.addAssetByProjectId(this.site.projectRef, this.site._id, this.newAsset)
             .then((asset: Asset)=>{
                 console.log('Asset saved', asset);
                 let assets = this.site.assets.slice(0);
@@ -75,7 +75,6 @@ export class SiteDetailComponent implements OnInit {
   
   private resetAndHideAssetForm(): void {
     this.assetFormVisible = false;
-	this.newAsset.assetName= '';
 	this.newAsset.assetAddress= '';
 	this.newAsset.lih= 0;
 	this.newAsset.cau= 0;

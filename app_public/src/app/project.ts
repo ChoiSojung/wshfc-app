@@ -1,6 +1,6 @@
 export class NewAsset{
   owner: string;
-  assetName: string;
+  siteRef: string;
   assetAddress: string;
   lih: number;
   cau: number;
@@ -9,9 +9,9 @@ export class NewAsset{
 
 export class Asset{
   _id: string;
+  siteRef: string;
   owner: string;
   created: string;
-  assetName: string;
   assetAddress: string;
   lih: number;
   cau: number;
@@ -20,6 +20,7 @@ export class Asset{
 
 export class NewSite {
   owner: string;
+  projectRef: string;
   siteName: string;
   siteAddress: string;
   legalDesc: string;
@@ -29,6 +30,7 @@ export class NewSite {
 export class Site {
   _id: string;
   owner: string;
+  projectRef: string;
   created: string;
   siteName: string;
   siteAddress: string;
@@ -56,6 +58,7 @@ export class Project {
 
 export class NewFunding {
   owner: string;
+  projectRef: string;
   sponsor: string;
   cosponsor: string;
   consultant: string;
@@ -66,41 +69,30 @@ export class NewFunding {
   ownershipState: string;
   lender: string;
   investor: string;
-  
   previousCommissionFinancing: boolean;
   dda: string;
   qct: string;
-  
-  //credit
   federalSetAside: string;
   allocationType: string;
   firstCreditYear: string;
   estimatedCredit: number;
   taxCreditFactor: number;
-  
-  //tdc
   anticipatedClosing: string;
   totalProjectCost: number;
   totalDevelopmentCost: number;
   totalDevelopmentCostLimit: number;
   tdcWaiver: boolean;
-  
-  //units
   studios: number;
   oneBdrms: number;
   twoBdrms: number;
   threeBdrms: number;
   fourBdrms: number;
   fiveBdrms: number;
-  
-  //set-asides
   disabled:number;
   elderly:number;
   homeless:number;
   largehh:number;
-  farmworker:number;
-    
-  //bond
+  farmworker:number;    
   taxExemptBond: number;
   taxableBond: number;
 }
@@ -108,6 +100,7 @@ export class NewFunding {
 export class Funding {
   _id: string;
   owner: string;
+  projectRef: string;
   created: string;
   sponsor: string;
   cosponsor: string;
@@ -119,41 +112,30 @@ export class Funding {
   ownershipState: string;
   lender: string;
   investor: string;
-  
   previousCommissionFinancing: boolean;
   dda: string;
-  qct: string;
-  
-  //credit
+  qct: string;  
   federalSetAside: string;
   allocationType: string;
   firstCreditYear: string;
   estimatedCredit: number;
-  taxCreditFactor: number;
-  
-  //tdc
+  taxCreditFactor: number;  
   anticipatedClosing: string;
   totalProjectCost: number;
   totalDevelopmentCost: number;
   totalDevelopmentCostLimit: number;
-  tdcWaiver: boolean;
-  
-  //units
+  tdcWaiver: boolean;  
   studio: number;
   oneBdrm: number;
   twoBdrm: number;
   threeBdrm: number;
   fourBdrm: number;
-  fiveBdrm: number;
-  
-  //set-asides
+  fiveBdrm: number;  
   disabled:number;
   elderly:number;
   homeless:number;
   largehh:number;
-  farmworker:number;
-    
-  //bond
+  farmworker:number;    
   taxExemptBond: number;
   taxableBond: number;
 }

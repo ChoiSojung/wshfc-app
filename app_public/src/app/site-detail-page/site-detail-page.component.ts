@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ProjectDataService } from '../project-data.service';
-import { Project, Site} from '../project'
+import { Project, Site } from '../project'
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -16,29 +16,25 @@ export class SiteDetailPageComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
   
-  public newSite: Site;
-  public siteid = '';
-  public projectid='';
   
+  public newSite: Site;
 
   ngOnInit(): void {
   	this.route.paramMap
         .pipe(
             switchMap((params: ParamMap)=>{
-				this.projectid = params.get('projectId');
-				this.siteid = params.get('siteId');
-                return this.projectDataService.getSiteById(this.projectid, this.siteid);
+                return this.projectDataService.getSiteById(params.get('projectId'), params.get('siteId'));
             })
         )
         .subscribe((newSite: Site)=>{
             this.newSite = newSite;
-            this.pageContent.header.strapline = newSite.siteName;
+            this.pageContent.header.strapline = this.newSite.siteAddress;
         });
   }
   
   public pageContent = {
     header: {
-        title: 'Site Detail',
+        title: 'Building Information',
         strapline: ''
     },
     sidebar: ''

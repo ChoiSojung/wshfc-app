@@ -5,11 +5,14 @@ const AssetSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     },
+	siteRef: {
+		type: mongoose.Schema.ObjectId,
+		ref: 'Site'
+	},
     created:{
         type: Date,
         default: Date.now
     },
-	"assetName": String,
 	"assetAddress": String,
 	"lih": Number,
 	"cau": Number,
@@ -21,6 +24,10 @@ const SiteSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     },
+	projectRef: {
+		type: mongoose.Schema.ObjectId,
+		ref: 'Project'
+	},
     created:{
         type: Date,
         default: Date.now
@@ -32,6 +39,12 @@ const SiteSchema = new mongoose.Schema({
     siteAddress: {
         type: String
     },
+	legalDesc: {
+		type: String
+	},
+	taxId: {
+		type: String
+	},
 	assets:[AssetSchema]
 });
 

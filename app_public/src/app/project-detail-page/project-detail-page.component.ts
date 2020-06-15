@@ -34,7 +34,7 @@ export class ProjectDetailPageComponent implements OnInit {
   
   public pageContent = {
     header: {
-        title: 'Your project details',
+        title: 'Project details',
         strapline: ''
     },
     sidebar: ''

@@ -38,21 +38,26 @@ export class ProjectDataService {
         .catch(this.handleError);
   }
   
+  public addProject(formData: NewProject): Promise<NewProject> {
+    const url: string = `${this.apiBaseUrl}/projects`;
+    const httpOptions = {
+        headers: new HttpHeaders({
+            'Authorization': `Bearer ${this.storage.getItem('project-token')}`
+        })
+    };
+    return this.http
+      .post(url, formData, httpOptions)
+      .toPromise()
+      .then(response => response as NewProject)
+      .catch(this.handleError);
+  }
+  
   public getProjectById(projectId: string): Promise<Project>{
     const url: string=`${this.apiBaseUrl}/projects/${projectId}`;
     return this.http
         .get(url)
         .toPromise()
         .then(response => response as Project)
-        .catch(this.handleError);
-  }
-  
-  public getSiteById(projectId: string, siteId: string): Promise<Site>{
-    const url: string=`${this.apiBaseUrl}/projects/${projectId}/sites/${siteId}`;
-    return this.http
-        .get(url)
-        .toPromise()
-        .then(response => response as Site)
         .catch(this.handleError);
   }
     
@@ -70,6 +75,15 @@ export class ProjectDataService {
       .catch(this.handleError);
   }
   
+  public getSiteById(projectId: string, siteId: string): Promise<Site>{
+    const url: string=`${this.apiBaseUrl}/projects/${projectId}/sites/${siteId}`;
+    return this.http
+        .get(url)
+        .toPromise()
+        .then(response => response as Site)
+        .catch(this.handleError);
+  }
+  
   public addAssetByProjectId(projectId: string, siteId: string, formData: NewAsset): Promise<NewAsset>{
   	const url: string=`${this.apiBaseUrl}/projects/${projectId}/sites/${siteId}/assets`;
 	const httpOptions = {
@@ -81,20 +95,6 @@ export class ProjectDataService {
       .post(url, formData, httpOptions)
       .toPromise()
       .then(response => response as Asset)
-      .catch(this.handleError);
-  }
-  
-  public addProject(formData: NewProject): Promise<NewProject> {
-    const url: string = `${this.apiBaseUrl}/projects`;
-    const httpOptions = {
-        headers: new HttpHeaders({
-            'Authorization': `Bearer ${this.storage.getItem('project-token')}`
-        })
-    };
-    return this.http
-      .post(url, formData, httpOptions)
-      .toPromise()
-      .then(response => response as NewProject)
       .catch(this.handleError);
   }
   

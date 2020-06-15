@@ -35,10 +35,10 @@ const doAddAsset = (req, res, project, site)=>{
 			.status(404)
 			.json({"message": "Project site not found"});
 	} else {
-		const {owner, assetName, assetAddress, lih, cau, mu} = req.body;
+		const {owner, siteRef, assetAddress, lih, cau, mu} = req.body;
 		site.assets.push({
 			owner,
-			assetName, 
+			siteRef,
 			assetAddress,
 			lih,
 			cau,
@@ -117,20 +117,9 @@ const assetsReadOne = (req, res)=>{
 								.status(404)
 								.json({"message": "asset not found"});
 						} else {
-							const response = {
-								project: {
-									name: project.name,
-									id: req.params.projectid
-								},
-								site: {
-									name: site.siteName,
-									id: req.params.siteid
-								},
-								asset
-							};
 							return res
 								.status(200)
-								.json(response);
+								.json(asset);
 						}		
 					} else {
 						return res
@@ -175,7 +164,6 @@ const assetsUpdateOne = (req, res)=>{
 								.status(404)
 								.json({"message": "Asset not found"});
 						} else {
-							thisAsset.assetName = req.body.assetName;
 							thisAsset.assetAddress = req.body.assetAddress;
 							thisAsset.lih = req.body.lih;
 							thisAsset.cau = req.body.cau;

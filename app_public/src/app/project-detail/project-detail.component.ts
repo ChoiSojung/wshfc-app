@@ -14,6 +14,7 @@ export class ProjectDetailComponent implements OnInit {
   
   public newSite: NewSite = {
     owner: '',
+	projectRef: '',
     siteName: '',
     siteAddress: '',
 	legalDesc: '',
@@ -56,6 +57,7 @@ export class ProjectDetailComponent implements OnInit {
   public onSiteSubmit(): void{
     this.siteFormError='';
     this.newSite.owner = this.getUserId();
+	this.newSite.projectRef = this.project._id;
     if(this.siteFormIsValid()){
         console.log(this.newSite);
         this.projectDataService.addSiteByProjectId(this.project._id, this.newSite)

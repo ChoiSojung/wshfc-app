@@ -22,8 +22,8 @@ export class SiteDetailComponent implements OnInit {
 	mu: 0,
   };
   
-  public formVisible: boolean = false;
-  public formError: string;
+  public assetFormVisible: boolean = false;
+  public assetFormError: string;
 
   constructor(
     private projectDataService: ProjectDataService,
@@ -33,7 +33,7 @@ export class SiteDetailComponent implements OnInit {
   ngOnInit() {
   }
   
-  private formIsValid(): boolean {
+  private assetFormIsValid(): boolean {
   	if(this.newAsset.assetName && this.newAsset.assetAddress){
         return true;
     } else {
@@ -56,9 +56,9 @@ export class SiteDetailComponent implements OnInit {
   }
   
   public onAssetSubmit(): void{
-    this.formError='';
+    this.assetFormError='';
     this.newAsset.owner = this.getUserId();
-    if(this.formIsValid()){
+    if(this.assetFormIsValid()){
         console.log(this.newAsset);
         this.projectDataService.addAssetByProjectId(this.project._id, this.site._id, this.newAsset)
             .then((asset: Asset)=>{
@@ -66,15 +66,15 @@ export class SiteDetailComponent implements OnInit {
                 let assets = this.site.assets.slice(0);
                 assets.unshift(asset);
                 this.site.assets = assets;
-                this.resetAndHideForm();
+                this.resetAndHideAssetForm();
             });
     } else {
-        this.formError = 'All fields required, please try again';
+        this.assetFormError = 'All fields required, please try again';
     }
   }
   
-  private resetAndHideForm(): void {
-    this.formVisible = false;
+  private resetAndHideAssetForm(): void {
+    this.assetFormVisible = false;
 	this.newAsset.assetName= '';
 	this.newAsset.assetAddress= '';
 	this.newAsset.lih= 0;

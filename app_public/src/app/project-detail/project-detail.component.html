@@ -16,11 +16,11 @@
 				</mat-card-header>
 				
 				<mat-card-content>
-					<button (click)="formVisible=true" class="btn btn-light">Add site</button>
-					<div *ngIf="formVisible">
+					<button (click)="siteFormVisible=true" class="btn btn-light">Add site</button>
+					<div *ngIf="siteFormVisible">
 						<br>
 						<form (ngSubmit)="onSiteSubmit()">
-							<div *ngIf="formError" class="alert alert-danger" role="alert">{{ formError }}</div>
+							<div *ngIf="siteFormError" class="alert alert-danger" role="alert">{{ siteFormError }}</div>
 							<div class="form-group row">
 							  <label for="siteName" class="col-sm-2 col-form-label">*Site Name:</label>
 							  <div class="col-sm-10">
@@ -48,7 +48,7 @@
 							<div class="form-group row">
 								<div class="col-13">
 									<button type="submit" class="btn btn-secondary btn-small float-right" style="margin-left:15px">Submit</button>
-									<button (click)="formVisible=false" type="button" class="btn btn-default float-right">Cancel</button>
+									<button (click)="siteFormVisible=false" type="button" class="btn btn-default float-right">Cancel</button>
 								</div>  
 							</div>
 						</form>
@@ -59,7 +59,7 @@
 								<mat-card-subtitle><span [innerHTML]="site.siteName"></span></mat-card-subtitle>
 							</mat-card-header>
 							<mat-card-content>
-								<button class="btn btn-link float-right">Edit Site</button>{{site.siteAddress}}
+								<button routerLink="{{'site/'+site._id}}" class="btn-link btn-sm float-right">Add building</button>{{site.siteAddress}}									
 							</mat-card-content>
 						</div>
 					</mat-card>
@@ -69,10 +69,6 @@
 			  <button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperNext>Next</button>
       		</mat-card-actions>
 		</mat-step><!-----site and building summary end----->
-		  
-		  
-		  
-		  
 		<mat-step label="Project Summary">
 			<mat-card class="form-card">
 				<mat-card-header>
@@ -92,29 +88,6 @@
 				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperPrevious>Previous</button>
 			</mat-card-actions>
 		</mat-step><!-----project summary end----->
-		  
-		  
-		  
-		  
-		<mat-step label="Scoring">
-			<mat-card class="form-card">
-				<mat-card-header>
-					<mat-card-title>
-						Scoring
-					</mat-card-title>
-					<mat-card-subtitle>
-						<span style="color: red">*</span>Field is required
-					</mat-card-subtitle>
-				</mat-card-header>
-				<mat-card-content>
-					<p>My content</p>
-				</mat-card-content>
-			</mat-card><!-----matcard end----->
-			<mat-card-actions>
-				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperNext>Next</button>
-				<button type="button" class="btn btn-outline-secondary float-right" mat-button matStepperPrevious>Previous</button>
-			</mat-card-actions>
-		</mat-step><!-----scoring end----->
 		<mat-step label="Attachments">
 			<mat-card class="form-card">
 				<mat-card-header>

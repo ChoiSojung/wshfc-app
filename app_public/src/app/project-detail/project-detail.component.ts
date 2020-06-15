@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Project, NewSite, Site } from '../project';
 import { User } from '../user';
 import { ProjectDataService } from '../project-data.service';
@@ -21,20 +20,18 @@ export class ProjectDetailComponent implements OnInit {
 	taxId: ''
   };
   
-  public formVisible: boolean = false;
-  public formError: string;
+  public siteFormVisible: boolean = false;
+  public siteFormError: string;
 
   constructor(
     private projectDataService: ProjectDataService,
-    private authenticationService: AuthenticationService,
-	private router: Router,
-	private route: ActivatedRoute
+    private authenticationService: AuthenticationService
     ) { }
 
   ngOnInit() {
   }
   
-  private formIsValid(): boolean {
+  private siteFormIsValid(): boolean {
     if(this.newSite.siteName && this.newSite.siteAddress){
         return true;
     } else {
@@ -57,9 +54,9 @@ export class ProjectDetailComponent implements OnInit {
   }
   
   public onSiteSubmit(): void{
-    this.formError='';
+    this.siteFormError='';
     this.newSite.owner = this.getUserId();
-    if(this.formIsValid()){
+    if(this.siteFormIsValid()){
         console.log(this.newSite);
         this.projectDataService.addSiteByProjectId(this.project._id, this.newSite)
             .then((site: Site)=>{
@@ -67,20 +64,18 @@ export class ProjectDetailComponent implements OnInit {
                 let sites = this.project.sites.slice(0);
                 sites.unshift(site);
                 this.project.sites = sites;
-                this.resetAndHideForm();
+                this.resetAndHideSiteForm();
             });
     } else {
-        this.formError = 'All fields required, please try again';
+        this.siteFormError = 'All fields required, please try again';
     }
   }
   
-  private resetAndHideForm(): void {
-    this.formVisible = false;
+  private resetAndHideSiteForm(): void {
+    this.siteFormVisible = false;
     this.newSite.siteName = '';
     this.newSite.siteAddress = '';
 	this.newSite.legalDesc = '';
 	this.newSite.taxId = '';
   }
-  
-
 }

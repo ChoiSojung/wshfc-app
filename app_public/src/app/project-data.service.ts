@@ -55,7 +55,7 @@ export class ProjectDataService {
         .then(response => response as Site)
         .catch(this.handleError);
   }
-  
+    
   public addSiteByProjectId(projectId: string, formData: NewSite): Promise<NewSite> {
     const url: string = `${this.apiBaseUrl}/projects/${projectId}/sites`;
     const httpOptions = {

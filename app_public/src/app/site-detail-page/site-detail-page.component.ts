@@ -16,16 +16,18 @@ export class SiteDetailPageComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
   
-  public newProject: Project;
   public newSite: Site;
+  public siteid = '';
+  public projectid='';
+  
 
   ngOnInit(): void {
   	this.route.paramMap
         .pipe(
             switchMap((params: ParamMap)=>{
-				let projectid = params.get('projectId');
-				let siteid = params.get('siteId');
-                return this.projectDataService.getSiteById(projectid, siteid);
+				this.projectid = params.get('projectId');
+				this.siteid = params.get('siteId');
+                return this.projectDataService.getSiteById(this.projectid, this.siteid);
             })
         )
         .subscribe((newSite: Site)=>{
